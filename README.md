@@ -1,2 +1,2 @@
 # HealthManagement
-NutritionFactsLabelDetection Android app using Tflite object detection model
+Android app using Tflite object detection model(Computer Vision)
