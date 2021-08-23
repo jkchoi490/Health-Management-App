@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="건강관리앱"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
+        <activity android:name=".DialogPlanExercise2Activity"></activity>
+        <activity android:name=".DialogNoExerciseWarningActivity" />
+        <activity android:name=".DialogPlanExercise1Activity" />
+        <activity android:name=".DialogAskPlanActivity" />
+        <activity android:name=".DialogOverActivity" />
+        <activity android:name=".DialogNotOverActivity" />
+        <activity android:name=".ExerciseActivity" />
+        <activity
+            android:name=".CameraAnalyzeActivity"
+            android:label="일단다이얼로그랑코딩테스팅"
+            android:parentActivityName=".MainActivity" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/progressbar_custom" />
+
+        <activity
+            android:name=".ViewCourses2"
+            android:label="식단입력정보" />
+        <activity
+            android:name=".ViewCourses"
+            android:label="사용자 정보" />
+        <activity
+            android:name=".MainActivity"
+            android:label="영양성분표분석 건강관리앱"
+            android:parentActivityName=".Insert2Activity" />
+        <activity
+            android:name=".FoodActivity"
+            android:label="식단입력하기" />
+        <activity
+            android:name=".NutritionActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CameraActivity2"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Insert2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>
