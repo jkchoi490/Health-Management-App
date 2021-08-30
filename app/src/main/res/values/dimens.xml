@@ -3,4 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- 텐서플로우 라이트 추가-->
+    <dimen name="tfe_bottom_sheet_corner_radius">15dp</dimen>
+    <dimen name="tfe_bottom_sheet_top_padding">8dp</dimen>
+    <dimen name="design_fab_size_normal" override="true">58dp</dimen>
+    <dimen name="design_fab_image_size" override="true">58dp</dimen>
+
 </resources>

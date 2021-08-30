@@ -27,5 +27,12 @@
     <color name="navy">#000080</color>
     <color name="Cyan">#00FFFF</color>
     <color name="LightSeaGreen">#20B2AA</color>
+    <color name="tfe_color_primary">#ffa800</color>
+    <color name="tfe_color_primary_dark">#ff6f00</color>
+    <color name="tfe_color_accent">#425066</color>
+    <color name="MintCream">#F5FFFA</color>
+    <color name="tfe_semi_transparent">#66000000</color>
+    <color name="LightCoral">#F08080</color>
+    <color name="SkyBlue">#87CEEB</color>
 
 </resources>

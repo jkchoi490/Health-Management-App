@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,11 +29,21 @@ android {
 
 
     }
+    aaptOptions {
+        noCompress "tflite"
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        mlModelBinding true
+    }
 }
+
+// import DownloadModels task
+project.ext.ASSET_DIR = projectDir.toString() + 'src/main/ml' //project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+
 
 dependencies {
     //noinspection GradleCompatible
@@ -41,6 +51,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0-rc1'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0-rc1'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
     // compile 'com.google.api-client:google-api-client-android:1.22.0'
     compile 'com.google.apis:google-api-services-vision:v1-rev357-1.22.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
@@ -67,5 +80,16 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1' //오류 해결
 
     implementation 'com.google.android.material:material:1.3.0'
+
+// tflite
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+   // implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+   // androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+    implementation 'org.tensorflow:tensorflow-lite:+' //종속성 추가 (3)
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+
+
 
 }

@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent5);
         });
 
+        //텐서플로우 테스팅
+        ImageButton button_tflitetesting= (ImageButton)findViewById(R.id.imageButtonJogging);
+        button_tflitetesting.setOnClickListener(v -> {
+            Intent intent_ = new Intent(MainActivity.this, DetectorActivity.class);
+            startActivity(intent_);
+        });
 
 
 

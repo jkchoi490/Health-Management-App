@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
 
+    <uses-sdk />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".DialogPlanExercise2Activity"></activity>
+        <activity android:name=".PassDataActivity"></activity>
+        <activity android:name=".DialogPlanExercise2Activity" />
         <activity android:name=".DialogNoExerciseWarningActivity" />
         <activity android:name=".DialogPlanExercise1Activity" />
         <activity android:name=".DialogAskPlanActivity" />
@@ -46,6 +52,12 @@
         <activity
             android:name=".NutritionActivity"
             android:parentActivityName=".MainActivity" />
+
+
+        <activity android:name=".DetectorActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity
             android:name=".CameraActivity2"
             android:parentActivityName=".MainActivity"
