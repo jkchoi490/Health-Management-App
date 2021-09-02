@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -51,7 +50,7 @@ public class CameraActivity2 extends AppCompatActivity {
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
     private static final int MAX_LABEL_RESULTS = 10;
-    private static final int MAX_DIMENSION = 1200;
+    private static final int MAX_DIMENSION = 1200; //지원 크기 1024 x 768
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int GALLERY_PERMISSIONS_REQUEST = 0;
@@ -63,6 +62,7 @@ public class CameraActivity2 extends AppCompatActivity {
     private ImageView mMainImage;
 
 
+    private Bitmap pass_image = null; //이미지 전달
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,13 @@ public class CameraActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_camera2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //--------------------------------------------------------------
+        Intent i = getIntent();
+        pass_image = (Bitmap) i. getParcelableExtra("pass_image");
+        //---------------------------------------------------------------
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -83,6 +90,8 @@ public class CameraActivity2 extends AppCompatActivity {
 
         mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
+        mMainImage.setImageBitmap(pass_image); //이거 추가함
+
     }
 
     public void startGalleryChooser() {
@@ -114,21 +123,23 @@ public class CameraActivity2 extends AppCompatActivity {
         return new File(dir, FILE_NAME);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        /*
         if (requestCode == GALLERY_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             uploadImage(data.getData());
         } else if (requestCode == CAMERA_IMAGE_REQUEST && resultCode == RESULT_OK) {
             Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
             uploadImage(photoUri);
-        }
+        }*/
+        uploadImage();
     }
 
     @Override
-    public void onRequestPermissionsResult(
-            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case CAMERA_PERMISSIONS_REQUEST:
@@ -144,26 +155,24 @@ public class CameraActivity2 extends AppCompatActivity {
         }
     }
 
-    public void uploadImage(Uri uri) {
-        if (uri != null) {
-            try {
-                // scale the image to save on bandwidth
-                Bitmap bitmap =
-                        scaleBitmapDown(
-                                MediaStore.Images.Media.getBitmap(getContentResolver(), uri),
-                                MAX_DIMENSION);
+    public void uploadImage(){//(Uri uri) {
+      //  if (uri != null) {
+            // scale the image to save on bandwidth
+            Bitmap bitmap =
+                    scaleBitmapDown(
+                         //MediaStore.Images.Media.getBitmap(getContentResolver(), uri), 원래 이거
+                           pass_image,
+                            MAX_DIMENSION);
 
-                callCloudVision(bitmap);
-                mMainImage.setImageBitmap(bitmap);
+            //mMainImage.setImageBitmap(bitmap);
+            callCloudVision(bitmap);// callCloudVision(bitmap);
 
-            } catch (IOException e) {
-                Log.d(TAG, "Image picking failed because " + e.getMessage());
-                Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Log.d(TAG, "Image picker gave us a null image.");
-            Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
-        }
+           // mMainImage.setImageBitmap(bitmap);
+
+        //} else {
+        //    Log.d(TAG, "Image picker gave us a null image.");
+       //     Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
+       // }
     }
 
     private Vision.Images.Annotate prepareAnnotationRequest(Bitmap bitmap) throws IOException {

@@ -60,9 +60,10 @@
 
         <activity
             android:name=".CameraActivity2"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".DetectorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".Insert2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

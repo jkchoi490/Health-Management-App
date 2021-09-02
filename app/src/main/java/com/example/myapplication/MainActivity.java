@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         //영양성분표 촬영
         ImageButton button_camera = (ImageButton)findViewById(R.id.imageButtonCamera);
         button_camera.setOnClickListener(v -> {
-            Intent intent1 = new Intent(MainActivity.this,CameraActivity2.class);
+            Intent intent1 = new Intent(MainActivity.this, DetectorActivity.class);
             startActivity(intent1);
         });
 
@@ -57,13 +57,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //텐서플로우 테스팅
+        /*
         ImageButton button_tflitetesting= (ImageButton)findViewById(R.id.imageButtonJogging);
         button_tflitetesting.setOnClickListener(v -> {
             Intent intent_ = new Intent(MainActivity.this, DetectorActivity.class);
             startActivity(intent_);
         });
 
-
+*/
 
 
     }
