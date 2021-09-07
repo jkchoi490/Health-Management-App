@@ -78,6 +78,7 @@ public class CameraActivity2 extends AppCompatActivity {
 
 
 
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity2.this);
@@ -86,11 +87,13 @@ public class CameraActivity2 extends AppCompatActivity {
                     .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
                     .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
             builder.create().show();
-        });
+        }); //일단 fab 버튼 없애보기
+
 
         mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
         mMainImage.setImageBitmap(pass_image); //이거 추가함
+        uploadImage(); //성공
 
     }
 
@@ -135,12 +138,18 @@ public class CameraActivity2 extends AppCompatActivity {
             Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
             uploadImage(photoUri);
         }*/
-        uploadImage();
+
+       // uploadImage(); //원래 여깄었음 여그
     }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        /*
         switch (requestCode) {
             case CAMERA_PERMISSIONS_REQUEST:
                 if (PermissionUtils.permissionGranted(requestCode, CAMERA_PERMISSIONS_REQUEST, grantResults)) {
@@ -153,6 +162,7 @@ public class CameraActivity2 extends AppCompatActivity {
                 }
                 break;
         }
+*/
     }
 
     public void uploadImage(){//(Uri uri) {
