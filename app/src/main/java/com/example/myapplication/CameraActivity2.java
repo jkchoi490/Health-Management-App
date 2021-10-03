@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
@@ -63,6 +62,7 @@ public class CameraActivity2 extends AppCompatActivity {
 
 
     private Bitmap pass_image = null; //이미지 전달
+    public static ArrayList<String> nut_list = new ArrayList<String>();  //영양성분표 글자인식 텍스트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +78,26 @@ public class CameraActivity2 extends AppCompatActivity {
 
 
 
-
+        //fab 버튼 클릭 시 NutritionLabels 액티비티로 글자인식 내용
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
+            // text 분석한 내용
+
+            /*
             AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity2.this);
             builder
                     .setMessage(R.string.dialog_select_prompt)
                     .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
                     .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
             builder.create().show();
-        }); //일단 fab 버튼 없애보기
+             */
+
+            Intent n_intent = new Intent(CameraActivity2.this, NutritionLabelsActivity.class);
+            // text 분석한 내용 넘겨주기
+            n_intent.putExtra("strings", nut_list);
+            startActivity(n_intent);
+            
+        });
 
 
         mImageDetails = findViewById(R.id.image_details);
@@ -332,13 +342,18 @@ public class CameraActivity2 extends AppCompatActivity {
             //    message.append("\n");
             message  = labels.get(0).getDescription();
             System.out.println(message);
-            //리스트 만들어서 글자 추출한 것 nut_list = []
+            //리스트 만들어서 글자 추출한 것
+            nut_list.add(message);
+
+
+
 
         } else {
             message="nothing";
         }
 
         // return message.toString();
+        System.out.println(nut_list);
         return message;
     }
 

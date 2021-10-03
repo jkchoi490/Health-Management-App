@@ -278,7 +278,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 System.out.println("width값 : "+location_width);
                                 System.out.println("height값 : "+location_height);
 
-                                //System.out.println("result안에 뭐가있나좀보자 염병 : "+result);
+                                //System.out.println(result);
                                 //mappedRecognitions : [[0] NutritionFactsLabel (70.3%) RectF(373.3333, 46.25, 536.6666, 425.0)]
                                 try {
                                     /*
@@ -332,7 +332,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                     */
                                 }catch (Exception err){
-                                    System.out.println("이미지 자르기 실패ㅠㅠ");
+                                    System.out.println("Fail image crop");
                                 }
 
                             }

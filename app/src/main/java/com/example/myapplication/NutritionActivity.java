@@ -63,7 +63,7 @@ public class NutritionActivity extends AppCompatActivity {
 
         SQLiteDatabase db = check_or_copy_db(); // SQLITE DB 저장소 옮김
 
-        //  탄수화물, 단백질, 지방, 포화지방, 식이섬유소, 콜레스테롤, 나트륨 (7 things)
+        // 탄수화물, 단백질, 지방, 포화지방, 식이섬유소, 콜레스테롤, 나트륨 (7 things)
         // 하루 총 필요열량 계산
 
         int calc = 69 * 30;

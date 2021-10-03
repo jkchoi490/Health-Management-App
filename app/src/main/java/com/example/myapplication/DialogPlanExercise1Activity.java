@@ -103,31 +103,25 @@ public class DialogPlanExercise1Activity extends AppCompatActivity {
 
 
         //운동 진행시 칼로리 소모량 계산하기
-        Button button_orange= (Button)findViewById(R.id.button_orange);
-        button_orange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent orange_i = new Intent(DialogPlanExercise1Activity.this, DialogPlanExercise2Activity.class);
-                String s_hour= edit_hour.getText().toString(); //운동하는 시간 - 시
-                String s_minutes = edit_minutes.getText().toString(); //운동하는시간 - 분
+        Button button_orange= findViewById(R.id.button_orange);
+        button_orange.setOnClickListener(v -> {
+            Intent orange_i = new Intent(DialogPlanExercise1Activity.this, DialogPlanExercise2Activity.class);
+            String s_hour= edit_hour.getText().toString(); //운동하는 시간 - 시
+            String s_minutes = edit_minutes.getText().toString(); //운동하는시간 - 분
 
-                s_valueList.add(s_hour);
-                s_valueList.add(s_minutes);
+            s_valueList.add(s_hour);
+            s_valueList.add(s_minutes);
 
-                orange_i.putExtra("s_valueList",s_valueList);
-                startActivity(orange_i);
-            }
+            orange_i.putExtra("s_valueList",s_valueList);
+            startActivity(orange_i);
         });
 
-       Button button_pre= (Button)findViewById(R.id.button_pre);
-       button_pre.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent pre_i = new Intent(DialogPlanExercise1Activity.this, DialogAskPlanActivity.class);
-               startActivity(pre_i);
-               edit_hour.setText("");
-               edit_minutes.setText("");
-           }
+       Button button_pre= findViewById(R.id.button_pre);
+       button_pre.setOnClickListener(v -> {
+           Intent pre_i = new Intent(DialogPlanExercise1Activity.this, DialogAskPlanActivity.class);
+           startActivity(pre_i);
+           edit_hour.setText("");
+           edit_minutes.setText("");
        });
 
 

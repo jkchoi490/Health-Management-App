@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -89,22 +88,16 @@ public class DialogOverActivity extends AppCompatActivity {
 
 
         //운동하고 해당식품 먹기 버튼 클릭 시 dialog_ask_plan 으로 넘어가기
-        Button button_yellow= (Button)findViewById(R.id.button_yellow);
-        button_yellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ask_i = new Intent(DialogOverActivity.this, DialogAskPlanActivity.class);
-                startActivity(ask_i);
-            }
+        Button button_yellow= findViewById(R.id.button_yellow);
+        button_yellow.setOnClickListener(v -> {
+            Intent ask_i = new Intent(DialogOverActivity.this, DialogAskPlanActivity.class);
+            startActivity(ask_i);
         });
         //취소 버튼시 돌아가기 기능
-        Button button_cancel= (Button)findViewById(R.id.button_cancel);
-        button_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cancel_i = new Intent(DialogOverActivity.this, CameraAnalyzeActivity.class);
-                startActivity(cancel_i);
-            }
+        Button button_cancel= findViewById(R.id.button_cancel);
+        button_cancel.setOnClickListener(v -> {
+            Intent cancel_i = new Intent(DialogOverActivity.this, CameraAnalyzeActivity.class);
+            startActivity(cancel_i);
         });
 
 

@@ -16,23 +16,17 @@ public class DialogAskPlanActivity extends AppCompatActivity {
 
 
         //예 버튼 클릭 시
-        Button button_yes= (Button)findViewById(R.id.button_yes);
-        button_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent plan_i = new Intent(DialogAskPlanActivity.this, DialogPlanExercise1Activity.class);
-               startActivity(plan_i);
-            }
+        Button button_yes= findViewById(R.id.button_yes);
+        button_yes.setOnClickListener(v -> {
+           Intent plan_i = new Intent(DialogAskPlanActivity.this, DialogPlanExercise1Activity.class);
+           startActivity(plan_i);
         });
 
         //아니오 버튼 클릭 시
-        Button button_no= (Button)findViewById(R.id.button_no);
-        button_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent plan_i = new Intent(DialogAskPlanActivity.this, DialogNoExerciseWarningActivity.class);
-                startActivity(plan_i);
-            }
+        Button button_no= findViewById(R.id.button_no);
+        button_no.setOnClickListener(v -> {
+            Intent plan_i = new Intent(DialogAskPlanActivity.this, DialogNoExerciseWarningActivity.class);
+            startActivity(plan_i);
         });
 
         //이전으로 버튼
