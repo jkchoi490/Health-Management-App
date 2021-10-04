@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DialogPlanExercise1Activity extends AppCompatActivity {
 
@@ -31,6 +33,9 @@ public class DialogPlanExercise1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_plan_exercise1);
+
+       Intent intent_dpe1 = getIntent();
+       Map<String, Integer> map = (Map<String, Integer>)intent_dpe1.getSerializableExtra("map");
 
 
        spinnerList.add("자전거");
@@ -113,6 +118,7 @@ public class DialogPlanExercise1Activity extends AppCompatActivity {
             s_valueList.add(s_minutes);
 
             orange_i.putExtra("s_valueList",s_valueList);
+            orange_i.putExtra("map",(Serializable) map);
             startActivity(orange_i);
         });
 

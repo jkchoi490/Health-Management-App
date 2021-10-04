@@ -52,19 +52,10 @@ public class MainActivity extends AppCompatActivity {
         //test 용
         ImageButton button_camera_analyze = (ImageButton)findViewById(R.id.imageButtonAnalyze);
         button_camera_analyze.setOnClickListener(v -> {
-            Intent intent5 = new Intent(MainActivity.this, CameraAnalyzeActivity.class);
+            Intent intent5 = new Intent(MainActivity.this, AnalyzedFoodActivity.class);
             startActivity(intent5);
         });
 
-        //텐서플로우 테스팅
-        /*
-        ImageButton button_tflitetesting= (ImageButton)findViewById(R.id.imageButtonJogging);
-        button_tflitetesting.setOnClickListener(v -> {
-            Intent intent_ = new Intent(MainActivity.this, DetectorActivity.class);
-            startActivity(intent_);
-        });
-
-*/
 
 
     }

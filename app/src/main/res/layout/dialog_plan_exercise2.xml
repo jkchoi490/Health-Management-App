@@ -197,6 +197,8 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
+                android:progress="33"
+                android:max="100"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="9dp" />
@@ -214,7 +216,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/button_cancel"
+                android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이전" />
@@ -223,7 +225,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
             <Button
-                android:id="@+id/button_save"
+                android:id="@+id/button_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/aqua"

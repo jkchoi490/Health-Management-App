@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".MyNutritionsActivity"></activity>
+        <activity android:name=".AnalyzedFoodActivity"></activity>
+        <activity android:name=".MyNutritionsActivity" />
         <activity
             android:name=".NutritionLabelsActivity"
             android:parentActivityName=".CameraActivity2" />

@@ -7,11 +7,10 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.Map;
 
 public class DialogOverActivity extends AppCompatActivity {
-
-
 
 
     //CameraAnalyzeActivity에서 넘어온 영양성분 값들
@@ -22,9 +21,6 @@ public class DialogOverActivity extends AppCompatActivity {
     int data_sik = 0;
     int data_na = 0;
     int data_col = 0;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +37,10 @@ public class DialogOverActivity extends AppCompatActivity {
         ImageView col_check = (ImageView)findViewById(R.id.imag_check_col);
 
 
-        Intent intent = getIntent();
-        Map<String, Integer> map = (Map<String, Integer>)intent.getSerializableExtra("map");
+        Intent intent_ = getIntent();
+        Map<String, Integer> map = (Map<String, Integer>)intent_.getSerializableExtra("map");
 
-        System.out.println("인텐트 값 전달하기 테스팅!!!!!!!---------------");
+        System.out.println("map 값 전달 테스팅---------------");
         for (String mapkey : map.keySet()){
             System.out.println("key:"+mapkey+",value:"+map.get(mapkey));
         }
@@ -91,12 +87,13 @@ public class DialogOverActivity extends AppCompatActivity {
         Button button_yellow= findViewById(R.id.button_yellow);
         button_yellow.setOnClickListener(v -> {
             Intent ask_i = new Intent(DialogOverActivity.this, DialogAskPlanActivity.class);
+            ask_i.putExtra("map",(Serializable) map);
             startActivity(ask_i);
         });
         //취소 버튼시 돌아가기 기능
         Button button_cancel= findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(v -> {
-            Intent cancel_i = new Intent(DialogOverActivity.this, CameraAnalyzeActivity.class);
+            Intent cancel_i = new Intent(DialogOverActivity.this, MyNutritionsActivity.class);
             startActivity(cancel_i);
         });
 

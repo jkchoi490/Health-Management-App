@@ -1,11 +1,15 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DialogPlanExercise2Activity extends AppCompatActivity {
 
@@ -17,6 +21,10 @@ public class DialogPlanExercise2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_plan_exercise2);
+
+        Intent intent_dpe2 = getIntent();
+        Map<String, Integer> map_food = (Map<String, Integer>)intent_dpe2.getSerializableExtra("map");
+
 
 
         ArrayList<String> s_valueList = (ArrayList<String>) getIntent().getSerializableExtra("s_valueList");
@@ -49,6 +57,23 @@ public class DialogPlanExercise2Activity extends AppCompatActivity {
         exercise_min.setText(s_exercise_min);
         calories_output.setText(s_calories_output);
       //  chuchen_g.setText(s_chuchen_g);
+
+        //진행하기 버튼 클릭
+        Button button_start= findViewById(R.id.button_start);
+        button_start.setOnClickListener(v -> {
+            Intent i_exercise = new Intent(DialogPlanExercise2Activity.this, ExerciseActivity.class);
+            Intent i_food = new Intent(DialogPlanExercise2Activity.this, AnalyzedFoodActivity.class);
+            i_food.putExtra("map",(Serializable) map_food);
+            startActivity(i_exercise);
+        });
+
+        //이전 버튼 클릭
+        Button button_back= findViewById(R.id.button_back);
+        button_back.setOnClickListener(v -> {
+            Intent i_back = new Intent(DialogPlanExercise2Activity.this, DialogPlanExercise1Activity.class);
+            startActivity(i_back);
+        });
+
 
 
 
