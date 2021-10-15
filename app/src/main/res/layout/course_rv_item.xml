@@ -13,7 +13,7 @@
 
         <!--text view for our course name-->
         <TextView
-            android:id="@+id/idTVCourseName"
+            android:id="@+id/idTVName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"

@@ -9,7 +9,7 @@
 
     <!--Edit text to enter course name-->
     <EditText
-        android:id="@+id/idEdtCourseName"
+        android:id="@+id/idEdtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -17,7 +17,7 @@
 
     <!--edit text to enter course duration-->
     <EditText
-        android:id="@+id/idEdtCourseDuration"
+        android:id="@+id/idEdtGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -25,7 +25,7 @@
 
     <!--edit text to display course tracks-->
     <EditText
-        android:id="@+id/idEdtCourseTracks"
+        android:id="@+id/idEdtHeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -33,7 +33,7 @@
 
     <!--edit text for course description-->
     <EditText
-        android:id="@+id/idEdtCourseDescription"
+        android:id="@+id/idEdtExercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

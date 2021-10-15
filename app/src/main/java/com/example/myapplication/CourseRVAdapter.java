@@ -59,7 +59,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our text views
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            courseNameTV = itemView.findViewById(R.id.idTVName);
             courseDescTV = itemView.findViewById(R.id.idTVCourseDescription);
             courseDurationTV = itemView.findViewById(R.id.idTVCourseDuration);
             courseTracksTV = itemView.findViewById(R.id.idTVCourseTracks);

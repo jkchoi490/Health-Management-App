@@ -56,7 +56,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + GENDER_COL + " TEXT,"
                 + EXERCISE_COL + " TEXT,"
                 //       +DAILY_CALORIES+"TEXT," //작성한것
-                + HEIGHT_COL + " TEXT)";
+                + HEIGHT_COL + " INTEGER)"; //TEXT였는데 바꿈
 
         // at last we are calling a exec sql
         // method to execute above sql query
@@ -64,7 +64,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new course to our sqlite database.
-    public void addNewCourse(String courseName, String courseDuration, String courseDescription, String courseTracks) {
+    public void addNewCourse(String sName, String sGender, String sExercise, String sHeight) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -77,10 +77,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // on below line we are passing all values
         // along with its key and value pair.
-        values.put(NAME_COL, courseName);
-        values.put(GENDER_COL, courseDuration);
-        values.put(EXERCISE_COL, courseDescription);
-        values.put(HEIGHT_COL, courseTracks);
+        values.put(NAME_COL, sName);
+        values.put(GENDER_COL, sGender);
+        values.put(EXERCISE_COL, sExercise);
+        values.put(HEIGHT_COL, sHeight);
         // values.put(DAILY_CALORIES,dailycalories); //작성한거
 
         // after adding all values we are passing
@@ -109,8 +109,8 @@ public class DBHandler extends SQLiteOpenHelper {
             do {
                 // on below line we are adding the data from cursor to our array list.
                 courseModalArrayList.add(new CourseModal(cursorCourses.getString(1),
-                        cursorCourses.getString(4),
                         cursorCourses.getString(2),
+                        cursorCourses.getString(4),
                         cursorCourses.getString(3)));
             } while (cursorCourses.moveToNext());
             // moving our cursor to next.

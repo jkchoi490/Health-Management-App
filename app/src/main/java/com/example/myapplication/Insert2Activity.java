@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Insert2Activity extends AppCompatActivity {
 
     // creating variables for our edittext, button and dbhandler
-    private EditText courseNameEdt, courseTracksEdt, courseDurationEdt, courseDescriptionEdt;
+    private EditText NameEdt, HeightEdt, GenderEdt, ExerciseEdt;
     private Button addCourseBtn;// readCourseBtn;
     private DBHandler dbHandler;
 
@@ -22,10 +22,10 @@ public class Insert2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_insert2);
 
         // initializing all our variables.
-        courseNameEdt = findViewById(R.id.idEdtCourseName);
-        courseTracksEdt = findViewById(R.id.idEdtCourseTracks);
-        courseDurationEdt = findViewById(R.id.idEdtCourseDuration);
-        courseDescriptionEdt = findViewById(R.id.idEdtCourseDescription);
+        NameEdt = findViewById(R.id.idEdtName); //이름
+        HeightEdt = findViewById(R.id.idEdtHeight); //키
+        GenderEdt = findViewById(R.id.idEdtGender);// 성별
+        ExerciseEdt = findViewById(R.id.idEdtExercise); //운동량
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         // readCourseBtn = findViewById(R.id.idBtnReadCourse);
 
@@ -39,29 +39,29 @@ public class Insert2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // below line is to get data from all edit text fields.
-                String courseName = courseNameEdt.getText().toString();
-                String courseTracks = courseTracksEdt.getText().toString();
-                String courseDuration = courseDurationEdt.getText().toString();
-                String courseDescription = courseDescriptionEdt.getText().toString();
+                String Name = NameEdt.getText().toString();
+                String Height = HeightEdt.getText().toString();
+                String Gender = GenderEdt.getText().toString();
+                String Exercise = ExerciseEdt.getText().toString();
 
                 // validating if the text fields are empty or not.
-                if (courseName.isEmpty() && courseTracks.isEmpty() && courseDuration.isEmpty() && courseDescription.isEmpty()) {
+                if (Name.isEmpty() && Height.isEmpty() && Gender.isEmpty() && Exercise.isEmpty()) {
                     Toast.makeText(Insert2Activity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 // on below line we are calling a method to add new
                 // course to sqlite data and pass all our values to it.
-                dbHandler.addNewCourse(courseName, courseDuration, courseDescription, courseTracks);
+                dbHandler.addNewCourse(Name, Gender, Exercise, Height);
 
                 // after adding the data we are displaying a toast message.
                 Toast.makeText(Insert2Activity.this, "사용자 정보가 입력되었습니다", Toast.LENGTH_SHORT).show();
-                courseNameEdt.setText("");
-                courseDurationEdt.setText("");
-                courseTracksEdt.setText("");
-                courseDescriptionEdt.setText("");
+                NameEdt.setText("");
+                GenderEdt.setText("");
+                HeightEdt.setText("");
+                ExerciseEdt.setText("");
 
-                Intent i = new Intent(Insert2Activity.this, MainActivity.class);
+                Intent i = new Intent(Insert2Activity.this, CalculateCaloriesActivity.class);
                 startActivity(i);
             }
         });
