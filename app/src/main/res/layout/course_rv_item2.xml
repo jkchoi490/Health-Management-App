@@ -18,11 +18,11 @@
 
     <!--text view for our course name-->
     <TextView
-        android:id="@+id/idTVCourseName"
+        android:id="@+id/idName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"
-        android:text="Course Name"
+        android:text="date"
         android:textColor="@color/black" />
 
     <LinearLayout
@@ -33,7 +33,7 @@
 
         <!--text view for our course tracks-->
         <TextView
-            android:id="@+id/idTVCourseTracks"
+            android:id="@+id/idTracks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
 
         <!--text view for our course duration-->
         <TextView
-            android:id="@+id/idTVCourseDuration"
+            android:id="@+id/idDuration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
 
     <!--text view for our course description-->
     <TextView
-        android:id="@+id/idTVCourseDescription"
+        android:id="@+id/idDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

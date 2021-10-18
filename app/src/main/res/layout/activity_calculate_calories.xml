@@ -18,7 +18,14 @@
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
         android:id="@+id/details">
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity ="center"
+            android:fillViewport="true"
+            android:layout_marginTop="0dp"
+            android:id="@+id/scrollView">
 
         <RelativeLayout
             android:orientation="vertical"
@@ -70,40 +77,358 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="100dp"
+                        android:layout_margin="56dp"
                         android:text="나의 하루 평균 총 필요열량"
                         android:textColor="@color/black"
                         android:textSize="25dp" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/my_cal_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="1dp"
+                    android:text="000 kcal"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+<LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="하루 평균 총 필요열량" />
+
+                <TextView
+                    android:id="@+id/my_cal_calories2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="13dp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:text="000" />
+
+                <TextView
+                    android:id="@+id/text__4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="13dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="(kcal)" />
+
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_chucheon_cal"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="4"
+                android:paddingTop="9dp" />
 
 
 
-                    <TextView
-                        android:id="@+id/my_cal_calories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="13dp"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:text="000" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="탄수화물 섭취량 : " />
 
+                <TextView
+                    android:id="@+id/my_cal_tan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:text="000" />
 
-                    <Button
-                        android:id="@+id/button_ok"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="14dp"
-                        android:textColor="@color/black"
-                        android:background="@color/SkyBlue"
-                        android:text="확인" />
+                <TextView
+                    android:id="@+id/text__5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="(kcal)" />
+            </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="단백질 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_dan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="지방 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_ji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="포화지방 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_poji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="지방 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_transji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="식이섬유소 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_sik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="콜레스테롤 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_col"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="나트륨 섭취량 : " />
+
+        <TextView
+            android:id="@+id/my_cal_na"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="000" />
+
+        <TextView
+            android:id="@+id/text__11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="(kcal)" />
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/button_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:textColor="@color/black"
+            android:background="@color/SkyBlue"
+            android:text="확인" />
 
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
 
-
+</ScrollView>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

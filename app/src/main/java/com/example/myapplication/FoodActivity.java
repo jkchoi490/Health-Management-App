@@ -22,10 +22,10 @@ public class FoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food);
 
         // initializing all our variables.
-        courseNameEdt = findViewById(R.id.idEdtCourseName);
-        courseTracksEdt = findViewById(R.id.idEdtCourseTracks);
-        courseDurationEdt = findViewById(R.id.idEdtCourseDuration);
-        courseDescriptionEdt = findViewById(R.id.idEdtCourseDescription);
+        courseNameEdt = findViewById(R.id.idTVCourseName);
+        courseTracksEdt = findViewById(R.id.idTVCourseTracks);
+        courseDurationEdt = findViewById(R.id.idTVCourseDuration);
+        courseDescriptionEdt = findViewById(R.id.idTVCourseDescription);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         readCourseBtn =findViewById(R.id.idBtnReadCourse);
 

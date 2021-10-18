@@ -1,21 +1,17 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class CalculateCaloriesActivity extends AppCompatActivity {
 
+    /*
     public SQLiteDatabase check_or_copy_db() {
         String fileName = "userDB.db";
         File file = getDatabasePath(fileName);
@@ -41,6 +37,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
         }
         return SQLiteDatabase.openOrCreateDatabase(file, null);
     }
+     */
 
 
     public double StandardWeight = 0; //표준체중
@@ -64,7 +61,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_calories);
 
-        SQLiteDatabase userDB = check_or_copy_db(); // SQLITE DB 저장소 옮김
+       // SQLiteDatabase userDB = check_or_copy_db(); // SQLITE DB 저장소 옮김
 
         DBHandler dbHelper = new DBHandler(this.getApplicationContext());
         ArrayList<CourseModal> courseModalArrayList = dbHelper.readCourses();
@@ -127,7 +124,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                 System.out.println("하루평균 총 필요 열량 : " + DailyCalories);
 
                 TextView calculate_calories = findViewById(R.id.my_cal_calories);
-                calculate_calories.setText(String.valueOf(DailyCalories));
+                calculate_calories.setText(String.valueOf((int)DailyCalories));
 
 
                 try {
@@ -144,6 +141,32 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                     System.out.println("콜 : " + cholesterol);
                     System.out.println("나트륨 : " + Nat);
                     System.out.println("당류 : " + dang);
+
+                    TextView calculate_tan = findViewById(R.id.my_cal_tan);
+                    calculate_tan.setText(String.valueOf((int)tansu));
+
+                    TextView calculate_dan = findViewById(R.id.my_cal_dan);
+                    calculate_dan.setText(String.valueOf((int)danbaek));
+
+                    TextView calculate_ji = findViewById(R.id.my_cal_ji);
+                    calculate_ji.setText(String.valueOf((int)jibang));
+
+                    TextView calculate_poji= findViewById(R.id.my_cal_poji);
+                    calculate_poji.setText(String.valueOf((int)pohwajibang));
+
+                    TextView calculate_transji = findViewById(R.id.my_cal_transji);
+                    calculate_transji.setText(String.valueOf((int)transjibang));
+
+                    TextView calculate_sik = findViewById(R.id.my_cal_sik);
+                    calculate_sik.setText(String.valueOf((int)sickisumyoo));
+
+                    TextView calculate_col = findViewById(R.id.my_cal_col);
+                    calculate_col.setText(String.valueOf((int)cholesterol));
+
+                    TextView calculate_na = findViewById(R.id.my_cal_na);
+                    calculate_na.setText(String.valueOf((int)Nat));
+
+
 
                 } catch (Exception err) {
                     System.out.println("Error");

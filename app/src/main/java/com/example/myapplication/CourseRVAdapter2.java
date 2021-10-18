@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CourseRVAdapter2 extends RecyclerView.Adapter<CourseRVAdapter2.ViewHolder> {
+public class CourseRVAdapter2 extends RecyclerView.Adapter<CourseRVAdapter2.ViewHolder> { //error
 
     // variable for our array list and context
     private ArrayList<CourseModal2> courseModalArrayList;
@@ -28,7 +28,8 @@ public class CourseRVAdapter2 extends RecyclerView.Adapter<CourseRVAdapter2.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // on below line we are inflating our layout
         // file for our recycler view items.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item, parent, false);
+        //java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference해결
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item2, parent, false); //R.layout.course_rv_item2로 변경
         return new ViewHolder(view);
     }
 
@@ -37,10 +38,11 @@ public class CourseRVAdapter2 extends RecyclerView.Adapter<CourseRVAdapter2.View
         // on below line we are setting data
         // to our views of recycler view item.
         CourseModal2 modal = courseModalArrayList.get(position);
-        holder.courseNameTV.setText(modal.getdate());
-        holder.courseDescTV.setText(modal.getsize());
-        holder.courseDurationTV.setText(modal.getdiet());
-        holder.courseTracksTV.setText(modal.getmenu());
+        holder.NameTV.setText(modal.getdate());
+
+        holder.DescTV.setText(modal.getsize());
+        holder.DurationTV.setText(modal.getdiet());
+        holder.TracksTV.setText(modal.getmenu());
     }
 
     @Override
@@ -52,15 +54,15 @@ public class CourseRVAdapter2 extends RecyclerView.Adapter<CourseRVAdapter2.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         // creating variables for our text views.
-        private TextView courseNameTV, courseDescTV, courseDurationTV, courseTracksTV;
+        private TextView NameTV, DescTV, DurationTV, TracksTV;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our text views
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
-            courseDescTV = itemView.findViewById(R.id.idTVCourseDescription);
-            courseDurationTV = itemView.findViewById(R.id.idTVCourseDuration);
-            courseTracksTV = itemView.findViewById(R.id.idTVCourseTracks);
+            NameTV = itemView.findViewById(R.id.idName);
+            DescTV = itemView.findViewById(R.id.idDescription);
+            DurationTV = itemView.findViewById(R.id.idDuration);
+            TracksTV = itemView.findViewById(R.id.idTracks);
         }
     }
 }
