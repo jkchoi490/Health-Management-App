@@ -19,7 +19,7 @@ public class PassDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pass_data);
 
         Intent i = getIntent();
-        pass_faceBmp = (Bitmap) i. getParcelableExtra("pass_image");
+        pass_faceBmp = i. getParcelableExtra("pass_image");
         ImageView passFace = findViewById(R.id.pass_dlg_image);
         passFace.setImageBitmap(pass_faceBmp);
 

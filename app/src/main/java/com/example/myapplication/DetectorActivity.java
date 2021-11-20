@@ -10,12 +10,17 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -36,8 +41,24 @@ import com.example.myapplication.tflite.Detector;
 import com.example.myapplication.tflite.TFLiteObjectDetectionAPIModel;
 import com.example.myapplication.tracking.MultiBoxTracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.vision.v1.Vision;
+import com.google.api.services.vision.v1.VisionRequest;
+import com.google.api.services.vision.v1.VisionRequestInitializer;
+import com.google.api.services.vision.v1.model.AnnotateImageRequest;
+import com.google.api.services.vision.v1.model.BatchAnnotateImagesRequest;
+import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
+import com.google.api.services.vision.v1.model.EntityAnnotation;
+import com.google.api.services.vision.v1.model.Feature;
+import com.google.api.services.vision.v1.model.Image;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +82,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     // Minimum detection confidence to track a detection.
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
     private static final boolean MAINTAIN_ASPECT = false;
+   // private static final Size DESIRED_PREVIEW_SIZE = new Size(1280, 720);
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+
+
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
     OverlayView trackingOverlay;
@@ -94,6 +118,23 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private Bitmap portraitBmp = null;
     private Bitmap faceBmp = null;
 
+    public int cropW = 0;
+    public int cropH = 0;
+
+    public Bitmap onebone = null; //크롭을 위한 원본이미지
+
+    //google cloud vision api===================
+    public int MAX_DIMENSION = 1200;
+    public static ArrayList<String> nut_list = new ArrayList<String>();
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String CLOUD_VISION_API_KEY ="AIzaSyCvzYj8F337WKnyVREMx3aXGo7YYEdwhdQ";
+    private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
+    private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
+
+    public boolean api_call = false;
+    //==========================================
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +153,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private void onAddClick() {
 
         addPending = true;
+
         showAddFaceDialog(crop_result_list);
+
         //Toast.makeText(this, "click", Toast.LENGTH_LONG ).show();
 
 
@@ -169,8 +212,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             targetW = previewWidth;
             targetH = previewHeight;
         }
-        int cropW = (int) (targetW / 2.0); // 자를 사진 크기 (가로)
-        int cropH = (int) (targetH / 2.0); // 자를 사진 크기 (세로)
+
+        cropW = (int) (targetW / 2.0); // 자를 사진 크기 (가로)
+        cropH = (int) (targetH / 2.0); // 자를 사진 크기 (세로)
 
         //   croppedBitmap = Bitmap.createBitmap(cropW, cropH, Config.ARGB_8888); //사진 자르기
 
@@ -218,6 +262,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         computingDetection = true;
         LOGGER.i("Preparing image " + currTimestamp + " for detection in bg thread.");
 
+        
         rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
 
         readyForNextImage();
@@ -267,12 +312,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                 float location_top = location.top;
                                 float location_left = location.left;
+                                float location_right = location.right;
+                                float location_bottom = location.bottom;
                                 float location_width = location.width();
                                 float location_height = location.height();
 
                                 System.out.println("location 값 : "+location);
-                                System.out.println("top값 : "+location_top);
-                                System.out.println("left값 : "+location_left);
+
                                 System.out.println("width값 : "+location_width);
                                 System.out.println("height값 : "+location_height);
 
@@ -293,7 +339,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     Double one = Double.parseDouble(one_s);
                                     Double two = Double.parseDouble(two_s);
                                     Double three = Double.parseDouble(three_s);
-                                    Double four = Double.parseDouble(four_s);*/
+                                    Double four = Double.parseDouble(four_s);
+                                    */
 
                                     float confidence = result.getConfidence();
 
@@ -301,34 +348,43 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     crop_result_list = new Detector.Recognition( //여기서 getCrop()하면 됨
                                             "0", "NutritionFactsLabel",confidence,location);
 
-                                    // Bitmap crop_image = keep_sibal(cropCopyBitmap,mappedRecognitions);
-                                    // Bitmap crop_image = crop_testing(location);
-                                    //Bitmap crop_image = cropNutritionFactsLabel(cropCopyBitmap,location); //이미지 잘라내기!
-                                    Bitmap crop_image = cropBitmap_testing(cropCopyBitmap);//여거
-                                    // Bitmap crop_image = help_crop(cropCopyBitmap, location);
+                                    /*
+                                    카메라 프레임 내에서 글자인식 진행
+                                    Bitmap crop_rect = Bitmap.createBitmap(cropCopyBitmap,
+                                            (int)location_left*2,
+                                            (int)location_top*2,
+                                            (int)location_width*1,
+                                            (int)location_height*1);
+
+
+                                    if(api_call == false) {
+                                        cloudText_recognize(crop_rect);
+                                        //cloudText_recognize(cropCopyBitmap);
+                                    }
+
+                                    if (nut_list.size() != 0){
+                                        Intent n_intent = new Intent(DetectorActivity.this, NutritionLabelsActivity.class);
+                                        // text 분석한 내용 넘겨주기
+                                        n_intent.putExtra("strings", nut_list);
+                                        startActivity(n_intent);
+                                    }
+                                   else{
+                                       break;
+                                    }
+
+                                     */
+
+                                  //  Bitmap crop_image = getCroppedBitmap_circle(cropCopyBitmap);
+                                   Bitmap crop_image = cropBitmap_testing(cropCopyBitmap);//이게찐임
+                                  //  Bitmap crop_image =  getCroppedBitmap(cropCopyBitmap,location);
+                                 //   Bitmap crop_image =  getCroppedBitmap(cropCopyBitmap);
+                                  //  Bitmap crop_image = cropImage(cropCopyBitmap,location); //2찐
+                                    //Bitmap crop_image = cropImage2(cropCopyBitmap,location);
+                                    //Bitmap crop_image = cropImageRect(cropCopyBitmap,location);
+
                                     crop_result_list.setCrop(crop_image);
 
-                                    /*
-                                    Paint paint_for_crop = new Paint();
-                                    paint_for_crop.setFilterBitmap(true);
-                                    int targetWidth = previewWidth;
-                                    int targetHeight = previewHeight;
 
-                                    Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetHeight,Bitmap.Config.ARGB_8888);
-
-                                    Matrix matrix = new Matrix();
-                                    matrix.postScale(1f, 1f);
-                                    Bitmap resizedBitmap = Bitmap.createBitmap(
-                                            targetBitmap,
-                                            one,
-                                            two,
-                                            three,
-                                            four);
-
-                                    Bitmap bd = resizedBitmap;
-                                    pass_image = bd;
-
-                                    */
                                 }catch (Exception err){
                                     System.out.println("Fail image crop");
                                 }
@@ -391,62 +447,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         runInBackground(() -> detector.setNumThreads(numThreads));
     }
 
-    //=------------------------------------------------------
-    public Bitmap cropNutritionFactsLabel(Bitmap source, RectF cropRectF){
-
-        Bitmap resultBitmap = Bitmap.createBitmap(portraitBmp, //추출해낸 부분 넣기
-                (int) cropRectF.left,
-                (int) cropRectF.top,
-                (int) cropRectF.width(),
-                (int) cropRectF.height());
-
-
-
-        Canvas cavas = new Canvas(resultBitmap);
-        // draw background 배경에 그리기 -> 카메라 프레임에 그리기로 변경
-        Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
-        paint.setColor(Color.WHITE);
-        cavas.drawRect(new RectF(0, 0, cropRectF.width(), cropRectF.height()),
-                paint);
-        Matrix matrix = new Matrix();
-        matrix.postTranslate(-cropRectF.left, -cropRectF.top);
-
-        cavas.drawBitmap(source, matrix, paint);
-
-        return resultBitmap;
-
-
-    }
-
-    // Face Processing
-    private Matrix createTransform(
-            final int srcWidth,
-            final int srcHeight,
-            final int dstWidth,
-            final int dstHeight,
-            final int applyRotation) {
-
-        Matrix matrix = new Matrix();
-        if (applyRotation != 0) {
-            //  if (applyRotation % 90 != 0) {
-            //    LOGGER.w("Rotation of %d % 90 != 0", applyRotation);
-            //  }
-            // Translate so center of image is at origin.
-            matrix.postTranslate(-srcWidth / 2.0f, -srcHeight / 2.0f);
-
-            // Rotate around origin.
-            matrix.postRotate(applyRotation);
-        }
-
-        if (applyRotation != 0) {
-
-            //  Translate back from origin centered reference to destination frame.
-            matrix.postTranslate(dstWidth / 2.0f, dstHeight / 2.0f);
-        }
-
-        return matrix;
-
-    }
 
     private void showAddFaceDialog(Detector.Recognition rec) { //자른부분 dilog로 저장하기--------
 
@@ -488,192 +488,332 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     }
 
-    public Bitmap crop_testing(RectF cropRectF){
-        Bitmap resultBitmap = null;
+    public Bitmap getCroppedBitmap_circle(Bitmap bitmap) {
 
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
 
-        int sourceW = rgbFrameBitmap.getWidth(); //처음이미지
-        int sourceH = rgbFrameBitmap.getHeight();
-        int targetW = portraitBmp.getWidth();  //추출해내려는 부분 가로
-        int targetH = portraitBmp.getHeight(); //추출해내려는 부분 세로
-        Matrix transform = createTransform(
-                sourceW,
-                sourceH,
-                targetW,
-                targetH,
-                sensorOrientation);
-        final Canvas cv = new Canvas(portraitBmp);
-        //세로 모드에서 원본 이미지를 그립니다. (draws the original image in portrait mode.)
-        cv.drawBitmap(rgbFrameBitmap, transform, null);
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        // final RectF rectf = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final Rect rect = new Rect(0,0,bitmap.getWidth(), bitmap.getHeight());
 
-        final Canvas cvFace = new Canvas(faceBmp);
-        cropToFrameTransform.mapRect(cropRectF);
-        // 원래 좌표를 세로 좌표에 매핑 (maps original coordinates to portrait coordinates)
-        RectF faceBB = new RectF(cropRectF);
-        transform.mapRect(faceBB);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        canvas.drawCircle(bitmap.getWidth() / 2,
+                bitmap.getHeight() / 2,
+                bitmap.getWidth() / 2, paint);
 
-        // 세로를 원점으로 변환하고 입력 추론 크기에 맞게 크기를 조정합니다.(translates portrait to origin and scales to fit input inference size)
-        //cv.drawRect(faceBB, paint);
-        float sx = ((float) TF_OD_API_INPUT_SIZE) / faceBB.width();
-        float sy = ((float) TF_OD_API_INPUT_SIZE) / faceBB.height();
-        Matrix matrix = new Matrix();
-        matrix.postTranslate(-faceBB.left, -faceBB.top);
-        matrix.postScale(sx, sy);
-
-        cvFace.drawBitmap(portraitBmp, matrix, null); //추출해낸 부분 그리기
-
-        resultBitmap = Bitmap.createBitmap(portraitBmp, //추출해낸 부분 넣기
-                (int) faceBB.left,
-                (int) faceBB.top,
-                (int) faceBB.width(),
-                (int) faceBB.height());
-
-
-        return resultBitmap;
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        //canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawBitmap(bitmap,rect,rect,paint);
+        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+        //return _bmp;
+        return output;
     }
 
     public Bitmap cropBitmap_testing(Bitmap original) {
 
+
+        //original.getWidth() : 384
+        //original.getHeight() : 384
+        System.out.println("previewWidth : "+previewWidth);
+        System.out.println("previewHeight : "+previewHeight);
+
+        System.out.println("original.getWidth() : "+original.getWidth());
+        System.out.println("original.getHeight() : "+original.getHeight());
+
         Bitmap result = Bitmap.createBitmap(original
-                , original.getWidth() / 3//X 시작위치 (원본의 4/1지점)
-                , original.getHeight() / 3 //Y 시작위치 (원본의 4/1지점)
-                , original.getWidth() / 2 // 넓이 (원본의 절반 크기)
-                , original.getHeight() / 2); // 높이 (원본의 절반 크기)
+                , original.getWidth()/4// 128 X 시작위치 (원본의 4/1지점)
+                , original.getHeight()/4 //128  Y 시작위치 (원본의 4/1지점)
+                , original.getWidth()/2 //192 넓이 (원본의 절반 크기) 86original.getWidth()/2
+                , original.getHeight()/2); //192 높이 (원본의 절반 크기)125original.getHeight()/2
+
         if (result != original) {
             original.recycle();
         }
         return result;
     } //찐
 
-//-----------------------------------------------------------------------------------------
-    /*
-    private static final float ASPECT_TOLERANCE = 0.1f;
+    public Bitmap getCroppedBitmap(Bitmap bitmap,RectF loc) {
 
-    public static Bitmap cropAndScaleImageIfNeeded(Context context, Bitmap original) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
 
-        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
-        if (screenWidth == original.getWidth() && screenHeight == original.getHeight()) {
-            return original;
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+       // final RectF rectf = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final Rect rect = new Rect(0,0,bitmap.getWidth(), bitmap.getHeight());
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        canvas.drawRect(loc.left,loc.top,loc.right,loc.bottom,paint);
+             //   bitmap.getWidth() / 2,
+               // bitmap.getHeight() / 2,
+                //bitmap.getWidth() / 2, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        //canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawBitmap(bitmap,rect,rect,paint);
+        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+        //return _bmp;
+        return output;
+    }
+
+    public Bitmap cropImage(Bitmap bitmap, RectF reference){ //길이 따져서해보기
+        int heightOriginal = previewHeight; //카메라 전체 화면 크기
+        int widthOriginal = previewWidth;
+
+        int heightFrame = (int) reference.height(); //사각형 높이
+        int widthFrame = (int) reference.width(); //사각형 가로
+        int leftFrame = (int) reference.left; //
+        int topFrame = (int) reference.top;
+
+        int heightReal = bitmap.getHeight();
+        int widthReal = bitmap.getWidth();
+
+        int widthFinal = (widthFrame * widthReal)/widthOriginal;
+        int heightFinal = (heightFrame * heightReal)/heightOriginal;
+        int leftFinal = (leftFrame * widthReal)/widthOriginal;
+        int topFinal = (topFrame * heightReal)/heightOriginal;
+
+        Bitmap bitmapfinal = Bitmap.createBitmap(bitmap,
+                leftFinal, topFinal, widthFinal, heightFinal);
+        System.out.println(" leftFinal : "+leftFinal);
+        System.out.println(" topFinal : "+topFinal);
+        System.out.println(" widthFinal : "+widthFinal);
+        System.out.println(" heightFinal : "+heightFinal);
+        System.out.println("previewWidth : "+previewWidth);
+        System.out.println("previewHeight : "+previewHeight);
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapfinal.compress(Bitmap.CompressFormat.JPEG, 100, stream);//100 is the best quality possibe
+       // return stream.toByteArray();
+        return bitmapfinal;
+    }
+    public Bitmap cropImageRect(Bitmap original, RectF rectangle){
+        float needWidth = 384; // 384
+        float needHeight = 384; // 384
+
+        int height_rect = (int) rectangle.height(); //사각형 높이
+        int width_rect = (int) rectangle.width(); //사각형 가로
+
+        int left_rect = (int) rectangle.left; //188
+        int top_rect = (int) rectangle.top;
+        int right_rect = (int) rectangle.right;
+        int bottom_rect = (int) rectangle.bottom;
+
+
+        float biyul_left = rectangle.left/needWidth;
+        float biyul_right = rectangle.right/needWidth;
+        float biyul_top = rectangle.top/needHeight;
+        float biyul_height = rectangle.bottom/needHeight;
+
+        System.out.println("biyul_right : "+biyul_right); //
+        System.out.println("biyul_height : "+biyul_height); //
+        System.out.println("biyul_left : "+biyul_left); //
+        System.out.println("biyul_top : "+biyul_top); //
+
+
+        int leftFinal = (int)(needWidth*biyul_left);
+        int topFinal = (int)(needHeight*biyul_top);
+        int widthFinal = width_rect;
+        int heightFinal = height_rect;
+
+        System.out.println("******rectangle : "+rectangle);
+        System.out.println(" leftFinal : "+leftFinal); //
+        System.out.println(" topFinal : "+topFinal); //
+        System.out.println(" widthFinal : "+widthFinal); //140
+        System.out.println(" heightFinal : "+heightFinal); //308
+
+        Bitmap thisiscropimage = Bitmap.createBitmap(
+                original,
+                leftFinal,
+                topFinal,
+                widthFinal,
+                heightFinal
+        );
+
+        return thisiscropimage;
+    }
+
+ //-------구글 클라우드 비전 -------------------------------------------------------
+    public void cloudText_recognize(Bitmap inputBitmap){
+
+        Bitmap bitmap =
+                scaleBitmapDown(
+                        inputBitmap,
+                        MAX_DIMENSION);
+        callCloudVision(bitmap);
+        api_call = true;
+
+    }
+
+
+    private Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
+
+        int originalWidth = bitmap.getWidth();
+        int originalHeight = bitmap.getHeight();
+        int resizedWidth = maxDimension;
+        int resizedHeight = maxDimension;
+
+        if (originalHeight > originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = (int) (resizedHeight * (float) originalWidth / (float) originalHeight);
+        } else if (originalWidth > originalHeight) {
+            resizedWidth = maxDimension;
+            resizedHeight = (int) (resizedWidth * (float) originalHeight / (float) originalWidth);
+        } else if (originalHeight == originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = maxDimension;
         }
-        Bitmap result;
-        float screenRatio = screenWidth / (float) screenHeight;
-        float bitmapRatio = original.getWidth() / (float) original.getHeight();
-        if (Math.abs(screenRatio - bitmapRatio) < ASPECT_TOLERANCE) {
-            // Just scale the bitmap
-            result = Bitmap.createScaledBitmap(original, screenWidth, screenHeight, true);
+        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
+    }
+
+    private void callCloudVision(final Bitmap bitmap) {
+        // Do the real work in an async task, because we need to use the network anyway
+        try {
+            AsyncTask<Object, Void, String> labelDetectionTask = new DetectorActivity.LableDetectionTask(this, prepareAnnotationRequest(bitmap));
+            labelDetectionTask.execute();
+            api_call = true;
+        } catch (IOException e) {
+            Log.d(TAG, "failed to make API request because of other IOException " +
+                    e.getMessage());
+        }
+    }
+
+    private Vision.Images.Annotate prepareAnnotationRequest(Bitmap bitmap) throws IOException {
+        HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
+        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+
+        VisionRequestInitializer requestInitializer =
+                new VisionRequestInitializer(CLOUD_VISION_API_KEY) {
+                    /**
+                     * We override this so we can inject important identifying fields into the HTTP
+                     * headers. This enables use of a restricted cloud platform API key.
+                     */
+                    @Override
+                    protected void initializeVisionRequest(VisionRequest<?> visionRequest)
+                            throws IOException {
+                        super.initializeVisionRequest(visionRequest);
+
+                        String packageName = getPackageName();
+                        visionRequest.getRequestHeaders().set(ANDROID_PACKAGE_HEADER, packageName);
+
+                        String sig = PackageManagerUtils.getSignature(getPackageManager(), packageName);
+
+                        visionRequest.getRequestHeaders().set(ANDROID_CERT_HEADER, sig);
+                    }
+                };
+
+        Vision.Builder builder = new Vision.Builder(httpTransport, jsonFactory, null);
+        builder.setVisionRequestInitializer(requestInitializer);
+
+        Vision vision = builder.build();
+
+        BatchAnnotateImagesRequest batchAnnotateImagesRequest =
+                new BatchAnnotateImagesRequest();
+        batchAnnotateImagesRequest.setRequests(new ArrayList<AnnotateImageRequest>() {{
+            AnnotateImageRequest annotateImageRequest = new AnnotateImageRequest();
+
+            // Add the image
+            Image base64EncodedImage = new Image();
+            // Convert the bitmap to a JPEG
+            // Just in case it's a format that Android understands but Cloud Vision
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+            byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+            // Base64 encode the JPEG
+            base64EncodedImage.encodeContent(imageBytes);
+            annotateImageRequest.setImage(base64EncodedImage);
+
+            // add the features we want
+            annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
+                Feature textDetection = new Feature();
+                textDetection.setType("DOCUMENT_TEXT_DETECTION");
+                // textDetection.setType("TEXT_DETECTION");
+                textDetection.setMaxResults(10);
+                add(textDetection);
+            }});
+
+            // Add the list of one thing to the request
+            add(annotateImageRequest);
+        }});
+
+        Vision.Images.Annotate annotateRequest =
+                vision.images().annotate(batchAnnotateImagesRequest);
+        // Due to a bug: requests to Vision API containing large images fail when GZipped.
+        annotateRequest.setDisableGZipContent(true);
+        Log.d(TAG, "created Cloud Vision request object, sending request");
+
+        return annotateRequest;
+    }
+
+    private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
+        private final WeakReference<DetectorActivity> mActivityWeakReference;
+        private Vision.Images.Annotate mRequest;
+
+        LableDetectionTask(DetectorActivity activity, Vision.Images.Annotate annotate) {
+            mActivityWeakReference = new WeakReference<>(activity);
+            mRequest = annotate;
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Log.d(TAG, "created Cloud Vision request object, sending request");
+                BatchAnnotateImagesResponse response = mRequest.execute();
+                return convertResponseToString(response);
+
+            } catch (GoogleJsonResponseException e) {
+                Log.d(TAG, "failed to make API request because " + e.getContent());
+            } catch (IOException e) {
+                Log.d(TAG, "failed to make API request because of other IOException " +
+                        e.getMessage());
+            }
+            return "Cloud Vision API request failed. Check logs for details.";
+        }
+
+        protected void onPostExecute(String result) {
+            DetectorActivity activity = mActivityWeakReference.get();
+            if (activity != null && !activity.isFinishing()) {
+               // TextView imageDetail = activity.findViewById(R.id.image_details);
+               // imageDetail.setText(result);
+            }
+        }
+    }
+
+    private static String convertResponseToString(BatchAnnotateImagesResponse response) {
+
+        //StringBuilder message = new StringBuilder("I found these things:\n\n");
+        String message = "I found these things:\n\n";
+        List<EntityAnnotation> labels = response.getResponses().get(0).getTextAnnotations(); //text로 받아와줌
+        if (labels != null) {
+            //for (EntityAnnotation label : labels) {
+            //      message.append(String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription()));
+            //    message.append("\n");
+            message  = labels.get(0).getDescription();
+            System.out.println(message);
+            //리스트 만들어서 글자 추출한 것
+            nut_list.add(message);
+
+
+
+
         } else {
-            // Do scale and center crop
-            result = scaleCenterCrop(original, screenHeight, screenWidth);
+            message="nothing";
         }
-        return result;
+
+        // return message.toString();
+        System.out.println(nut_list);
+        return message;
     }
-
-    private static Bitmap scaleCenterCrop(Bitmap source, int newHeight, int newWidth) {
-        int sourceWidth = source.getWidth();
-        int sourceHeight = source.getHeight();
-
-        // Compute the scaling factors to fit the new height and width, respectively.
-        // To cover the final image, the final scaling will be the bigger
-        // of these two.
-        float xScale = (float) newWidth / sourceWidth;
-        float yScale = (float) newHeight / sourceHeight;
-        float scale = Math.max(xScale, yScale);
-
-        // Now get the size of the source bitmap when scaled
-        float scaledWidth = scale * sourceWidth;
-        float scaledHeight = scale * sourceHeight;
-
-        // Let's find out the upper left coordinates if the scaled bitmap
-        // should be centered in the new size give by the parameters
-        float left = (newWidth - scaledWidth) / 2;
-        float top = (newHeight - scaledHeight) / 2;
-
-        // The target rectangle for the new, scaled version of the source bitmap will now be
-        RectF targetRect =
-                new RectF(left, top, left + scaledWidth, top + scaledHeight);
-
-        // Finally, we create a new bitmap of the specified size and draw our new,
-        // scaled bitmap onto it.
-        Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, source.getConfig());
-        Canvas canvas = new Canvas(dest);
-        canvas.drawBitmap(source, null, targetRect, null);
-        return dest;
-    }
-
-*/
-
-    public Bitmap keep_sibal(Bitmap original, List<Detector.Recognition> mappedRecognitions){
-
-        String str_rec = mappedRecognitions.get(0).toString();
-        String substr = str_rec.substring(str_rec.indexOf("RectF("));
-        String[] array_substr = substr.split(",");
-
-        String one_s = array_substr[0].substring(array_substr[0].lastIndexOf("(")+1);
-        String two_s = array_substr[1].replaceAll(" ", "");
-        String three_s = array_substr[2].replaceAll(" ", "");
-        String four_s = array_substr[3].substring(0, array_substr[3].lastIndexOf(")")).replaceAll(" ", "");
-
-
-        Double b_left = new Double(Double.parseDouble(one_s));
-        Double b_top = new Double(Double.parseDouble(two_s));
-        Double b_width = new Double(Double.parseDouble(three_s));
-        Double b_height = new Double(Double.parseDouble(four_s));
-
-
-        int boxing_left = b_left.intValue();
-        int boxing_top = b_top.intValue();
-        int boxing_width = b_width.intValue();
-        int boxing_height = b_height.intValue();
-
-        int box_left = boxing_left;
-        int box_top = boxing_top;
-        int box_width = boxing_width;
-        int box_height = boxing_height;
-
-        Bitmap result = Bitmap.createBitmap(original
-                , box_left*1//X 시작위치 (원본의 4/1지점)
-                , box_top*1 //Y 시작위치 (원본의 4/1지점)
-                , box_width * 1 // 넓이 (원본의 절반 크기)
-                , box_height*1); // 높이 (원본의 절반 크기)
-        if (result != original) {
-            original.recycle();
-        }
-        return result;
-    }
-
-
-    public Bitmap help_crop(Bitmap original, RectF rect){
-
-        //calculate aspect ratio
-        float koefX = (float) previewWidth/ (float) original.getWidth();
-        float koefY = (float) previewHeight/ (float) original.getHeight();
-
-        //get viewfinder border size and position on the screen
-        int x1 = (int) rect.left;
-        int y1 = (int) rect.top;
-
-        int x2 = (int) rect.width();
-        int y2 = (int) rect.height();
-
-        //calculate position and size for cropping
-        int cropStartX = Math.round(x1 * koefX);
-        int cropStartY = Math.round(y1 * koefY);
-
-        int cropWidthX = Math.round(x2 * koefX);
-        int cropHeightY = Math.round(y2 * koefY);
-
-
-        Bitmap result = Bitmap.createBitmap(original
-                , x1*1//X 시작위치
-                , y1*1 //Y 시작위치
-                , x2*2 // 넓이
-                , y2*2); // 높이
-        if (result != original) {
-            original.recycle();
-        }
-        return result;
-    }
-
 
 }

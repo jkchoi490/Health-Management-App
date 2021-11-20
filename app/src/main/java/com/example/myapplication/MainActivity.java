@@ -56,7 +56,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent5);
         });
 
+        ImageButton button_exercise = (ImageButton)findViewById(R.id.imageButtonJogging);
+        button_exercise.setOnClickListener(v -> {
+            Intent intent_exercise = new Intent(MainActivity.this, ExerciseActivity.class);
+            startActivity(intent_exercise);
+        });
 
+        ImageButton button_calendar = findViewById(R.id.imageButtonCalandar);
+        button_calendar.setOnClickListener(v -> {
+            Intent intent_calendar = new Intent(MainActivity.this, CalendarActivity.class);
+            startActivity(intent_calendar);
+        });
 
     }
 }

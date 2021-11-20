@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-
-
+        <activity android:name=".SelectFoodActivity"></activity>
+        <activity android:name=".CalendarActivity" />
         <activity android:name=".AnalyzedFoodActivity" />
         <activity android:name=".MyNutritionsActivity" />
         <activity
@@ -53,10 +53,9 @@
             android:name=".MainActivity"
             android:label="영양성분표분석 건강관리앱"
             android:parentActivityName=".CalculateCaloriesActivity" />
-        <activity android:name=".CalculateCaloriesActivity"
-            android:parentActivityName=".Insert2Activity"
-            ></activity>
-
+        <activity
+            android:name=".CalculateCaloriesActivity"
+            android:parentActivityName=".Insert2Activity" />
         <activity
             android:name=".FoodActivity"
             android:label="식단입력하기" />
@@ -71,8 +70,6 @@
             android:parentActivityName=".DetectorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity android:name=".Insert2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
