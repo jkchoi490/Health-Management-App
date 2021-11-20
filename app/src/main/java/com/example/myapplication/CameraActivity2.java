@@ -73,7 +73,7 @@ public class CameraActivity2 extends AppCompatActivity {
 
         //--------------------------------------------------------------
         Intent i = getIntent();
-        pass_image = (Bitmap) i. getParcelableExtra("pass_image");
+        pass_image = (Bitmap) i. getParcelableExtra("pass_crop");
         //---------------------------------------------------------------
 
 

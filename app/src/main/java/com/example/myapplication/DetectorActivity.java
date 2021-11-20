@@ -476,7 +476,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 dlg.dismiss();
 
                 //내가짠코드*************************************
-                Intent intent = new Intent(DetectorActivity.this, CameraActivity2.class);
+                Intent intent = new Intent(DetectorActivity.this, CropActivity.class);
                 //name 넘겨주고, image 넘겨주기
                 intent.putExtra("pass_image",pass_image);
                 startActivity(intent);

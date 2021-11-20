@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         //영양성분표 촬영
         ImageButton button_camera = (ImageButton)findViewById(R.id.imageButtonCamera);
         button_camera.setOnClickListener(v -> {
-            Intent intent1 = new Intent(MainActivity.this, DetectorActivity.class);
+           // Intent intent1 = new Intent(MainActivity.this, DetectorActivity.class);
+            Intent intent1 = new Intent(MainActivity.this, SelectFoodActivity.class);
             startActivity(intent1);
         });
 
