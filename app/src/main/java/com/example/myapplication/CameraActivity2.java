@@ -244,7 +244,7 @@ public class CameraActivity2 extends AppCompatActivity {
             // add the features we want
             annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                 Feature textDetection = new Feature();
-                textDetection.setType("DOCUMENT_TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
+                textDetection.setType("TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
                 //textDetection.setType("TEXT_DETECTION");
                 textDetection.setMaxResults(10);
                 add(textDetection);

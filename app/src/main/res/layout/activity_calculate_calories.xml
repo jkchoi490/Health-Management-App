@@ -126,22 +126,13 @@
                     android:id="@+id/text__4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="13dp"
+                    android:padding="12dp"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:text="(kcal)" />
+                    android:text="kcal" />
 
 
             </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/progress_chucheon_cal"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="4"
-                android:paddingTop="9dp" />
 
 
 
@@ -162,12 +153,12 @@
                 <TextView
                     android:id="@+id/my_cal_tan"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:padding="10dp"
+                    android:text="000"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:text="000" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/text__5"
@@ -176,7 +167,7 @@
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:text="(kcal)" />
+                    android:text="kcal" />
             </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -209,7 +200,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="kcal" />
     </LinearLayout>
 
     <LinearLayout
@@ -243,7 +234,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="kcal" />
     </LinearLayout>
 
     <LinearLayout
@@ -277,7 +268,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="kcal" />
     </LinearLayout>
 
     <LinearLayout
@@ -292,7 +283,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="지방 섭취량 : " />
+            android:text="트랜스지방 섭취량 : " />
 
         <TextView
             android:id="@+id/my_cal_transji"
@@ -311,7 +302,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="kcal" />
     </LinearLayout>
 
     <LinearLayout
@@ -326,7 +317,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="식이섬유소 섭취량 : " />
+            android:text="식이섬유소 권장섭취량 : " />
 
         <TextView
             android:id="@+id/my_cal_sik"
@@ -345,7 +336,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="g" />
     </LinearLayout>
 
     <LinearLayout
@@ -357,17 +348,17 @@
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="9dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="콜레스테롤 섭취량 : " />
+            android:text="콜레스테롤 최대 섭취량 : " />
 
         <TextView
             android:id="@+id/my_cal_col"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
+            android:padding="9dp"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:text="000" />
@@ -376,10 +367,10 @@
             android:id="@+id/text__10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="9dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="(kcal)" />
+            android:text="mg" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -393,7 +384,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="나트륨 섭취량 : " />
+            android:text="나트륨 최대섭취량 : " />
 
         <TextView
             android:id="@+id/my_cal_na"
@@ -410,9 +401,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:text="mg"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:text="(kcal)" />
+            android:textSize="18dp" />
     </LinearLayout>
 
     <Button

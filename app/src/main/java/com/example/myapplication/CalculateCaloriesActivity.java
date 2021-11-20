@@ -50,10 +50,12 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
     public double jibang = 0;       //(25% 이내)
     public double transjibang = 0;  //최소화
     public double pohwajibang = 0;  //(7%미만, 최소화)
-    public double sickisumyoo = 0;    //1일 20g-25g (1g 당 2kcal) => 40 ~ 50kcal
-    public double cholesterol = 0;  //0 최소화
-    public double Nat = 0;              // 1일 4000mg 이하
+    public double sickisumyoo =25;    //1일 20g-25g (1g 당 2kcal) => 40 ~ 50kcal
+    public double cholesterol = 2000;  //0 최소화
+    public double Nat = 4000;              // 1일 4000mg 이하
     public double dang = 0;         //0최소화
+
+    private DBHandlerNutrition dbHandlerNutrition;
 
 
     @Override
@@ -61,10 +63,12 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_calories);
 
-       // SQLiteDatabase userDB = check_or_copy_db(); // SQLITE DB 저장소 옮김
+
 
         DBHandler dbHelper = new DBHandler(this.getApplicationContext());
         ArrayList<CourseModal> courseModalArrayList = dbHelper.readCourses();
+
+        dbHandlerNutrition = new DBHandlerNutrition(CalculateCaloriesActivity.this);
 
         for (CourseModal row : courseModalArrayList) { // 데이터 읽음
             int id = row.getId();
@@ -83,8 +87,6 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
             //사람이름 화면에 표시 user_name
             TextView tv_user_name = findViewById(R.id.user_name);
             tv_user_name.setText(user_name);
-
-
 
             try {
 
@@ -108,12 +110,12 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                 System.out.println("표준체중 : " + StandardWeight);
 
                 if (exercise.equals("적음")) {
-                    ExerciseValue = 25;
+                    ExerciseValue = 27;
 
                 } else if (exercise.equals("보통")) {
-                    ExerciseValue = 30;
+                    ExerciseValue = 32;
                 } else if (exercise.equals("많음")) {
-                    ExerciseValue = 35;
+                    ExerciseValue = 37;
 
                 } else {
                     System.out.println("exercise value error");
@@ -126,12 +128,14 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                 TextView calculate_calories = findViewById(R.id.my_cal_calories);
                 calculate_calories.setText(String.valueOf((int)DailyCalories));
 
+                TextView calculate_calories2 = findViewById(R.id.my_cal_calories2);
+                calculate_calories2.setText(String.valueOf((int)DailyCalories));
 
                 try {
                     tansu = DailyCalories * 0.5;
                     danbaek = DailyCalories * 0.2;
                     jibang = DailyCalories * 0.25;
-                    pohwajibang = DailyCalories * 0.07;
+                    pohwajibang = DailyCalories * 0.05;
                     System.out.println("탄수화물 : " + tansu);
                     System.out.println("단백질 : " + danbaek);
                     System.out.println("지방 : " + jibang);
@@ -141,6 +145,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                     System.out.println("콜 : " + cholesterol);
                     System.out.println("나트륨 : " + Nat);
                     System.out.println("당류 : " + dang);
+
 
                     TextView calculate_tan = findViewById(R.id.my_cal_tan);
                     calculate_tan.setText(String.valueOf((int)tansu));
@@ -167,9 +172,33 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                     calculate_na.setText(String.valueOf((int)Nat));
 
 
+                    //DB에 저장
+                    String cal_db = String.valueOf((int)DailyCalories);
+                    String tan_db = String.valueOf((int)tansu);
+                    String dan_db = String.valueOf((int)danbaek);
+                    String ji_db = String.valueOf((int)jibang);
+                    String poji_db = String.valueOf((int)pohwajibang);
+                    String sik_db = String.valueOf((int)sickisumyoo);
+                    String col_db = String.valueOf((int)cholesterol);
+                    String na_db = String.valueOf((int)Nat);
+
+
+                    dbHandlerNutrition.addNewCourseN(
+                            user_name,
+                            gender,
+                            exercise,
+                            s_height,
+                            cal_db,
+                            tan_db,
+                            dan_db,
+                            ji_db,
+                            poji_db,
+                            sik_db,
+                            col_db,
+                            na_db);
 
                 } catch (Exception err) {
-                    System.out.println("Error");
+                    System.out.println("으아아아ㅏ아에러그만");
                 }
 
 
@@ -183,7 +212,8 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
         //Button
         Button button_ok= findViewById(R.id.button_ok);
         button_ok.setOnClickListener(v -> {
-            Intent ok_intent= new Intent(CalculateCaloriesActivity.this, MainActivity.class);
+
+            Intent ok_intent= new Intent(CalculateCaloriesActivity.this,tandanjipoActivity.class);
             startActivity(ok_intent);
         });
 

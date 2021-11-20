@@ -70,15 +70,9 @@ public class CropActivity extends AppCompatActivity {
                 Bitmap crop_bitmap = drawable.getBitmap();
 
                 Intent intent_crop = new Intent(CropActivity.this, CameraActivity2.class);
-                //name 넘겨주고, image 넘겨주기
                 intent_crop.putExtra("pass_crop", crop_bitmap);
                 startActivity(intent_crop);
 
-                /*
-                Uri resultUri = result.getUri();
-                ImageView myimageview = findViewById(R.id.imageView); //추가된내용
-                myimageview.setImageURI(resultUri); //추가된내용
-                */
 
                 //실패시
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -348,6 +349,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     crop_result_list = new Detector.Recognition( //여기서 getCrop()하면 됨
                                             "0", "NutritionFactsLabel",confidence,location);
 
+
+                                    //Bitmap crop_image =
+                                      //      byteArrayToBitmap(cropImage_(cropCopyBitmap,cropCopyBitmap, location));
+
+                                    //Bitmap crop_image = getCroppedBitmap_circle(cropCopyBitmap);
                                     /*
                                     카메라 프레임 내에서 글자인식 진행
                                     Bitmap crop_rect = Bitmap.createBitmap(cropCopyBitmap,
@@ -378,7 +384,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                    Bitmap crop_image = cropBitmap_testing(cropCopyBitmap);//이게찐임
                                   //  Bitmap crop_image =  getCroppedBitmap(cropCopyBitmap,location);
                                  //   Bitmap crop_image =  getCroppedBitmap(cropCopyBitmap);
-                                  //  Bitmap crop_image = cropImage(cropCopyBitmap,location); //2찐
+                                    //Bitmap crop_image = cropImage(cropCopyBitmap,location); //2찐
                                     //Bitmap crop_image = cropImage2(cropCopyBitmap,location);
                                     //Bitmap crop_image = cropImageRect(cropCopyBitmap,location);
 
@@ -488,32 +494,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     }
 
-    public Bitmap getCroppedBitmap_circle(Bitmap bitmap) {
 
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        // final RectF rectf = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final Rect rect = new Rect(0,0,bitmap.getWidth(), bitmap.getHeight());
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        canvas.drawCircle(bitmap.getWidth() / 2,
-                bitmap.getHeight() / 2,
-                bitmap.getWidth() / 2, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        //canvas.drawBitmap(bitmap, rect, rect, paint);
-        canvas.drawBitmap(bitmap,rect,rect,paint);
-        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-        //return _bmp;
-        return output;
-    }
 
     public Bitmap cropBitmap_testing(Bitmap original) {
 
@@ -642,6 +623,44 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         return thisiscropimage;
     }
+
+   // private byte[] cropImage_(Bitmap bitmap, View frame, View reference) {
+        private byte[] cropImage_(Bitmap bitmap, View frame, RectF reference) {
+        float heightOriginal = frame.getHeight();
+        float widthOriginal = frame.getWidth();
+
+        float heightFrame = reference.height(); //getHeight();
+        float widthFrame = reference.height(); //getWidth();
+        float leftFrame = reference.left;//getLeft();
+        float topFrame = reference.top;//getTop();
+        float heightReal = bitmap.getHeight();
+        float widthReal = bitmap.getWidth();
+
+        float widthFinal = widthFrame * widthReal / widthOriginal;
+        float heightFinal = heightFrame * heightReal / heightOriginal;
+        float leftFinal = leftFrame * widthReal / widthOriginal;
+        float topFinal = topFrame * heightReal / heightOriginal;
+
+        Bitmap bitmapFinal = Bitmap.createBitmap(
+                bitmap,
+                (int) leftFinal,
+                (int) topFinal,
+                (int) widthFinal,
+                (int) heightFinal);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapFinal.compress(
+                Bitmap.CompressFormat.JPEG,
+                100,
+                stream
+        ); //100 is the best quality possibe
+        return stream.toByteArray();
+    }
+
+    public Bitmap byteArrayToBitmap( byte[] $byteArray ) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray( $byteArray, 0, $byteArray.length ) ;
+        return bitmap ;
+    }
+
 
  //-------구글 클라우드 비전 -------------------------------------------------------
     public void cloudText_recognize(Bitmap inputBitmap){

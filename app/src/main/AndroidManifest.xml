@@ -19,7 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".CropActivity"></activity>
+        <activity android:name=".SikActivity"
+            android:parentActivityName=".tcolnadangActivity"
+            ></activity>
+        <activity android:name=".tcolnadangActivity"
+            android:parentActivityName=".tandanjipoActivity"/>
+
+        <activity android:name=".tandanjipoActivity" />
+        <activity android:name=".CropActivity" />
         <activity
             android:name=".SelectFoodActivity"
             android:parentActivityName=".DetectorActivity" />
@@ -40,9 +47,7 @@
         <activity
             android:name=".CameraAnalyzeActivity"
             android:label="일단다이얼로그랑코딩테스팅"
-            android:parentActivityName=".MainActivity" />
-
-        <!-- Image Crop 라이브러리 추가 -->
+            android:parentActivityName=".MainActivity" /> <!-- Image Crop 라이브러리 추가 -->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -60,7 +65,7 @@
         <activity
             android:name=".MainActivity"
             android:label="영양성분표분석 건강관리앱"
-            android:parentActivityName=".CalculateCaloriesActivity" />
+            android:parentActivityName=".SikActivity" />
         <activity
             android:name=".CalculateCaloriesActivity"
             android:parentActivityName=".Insert2Activity" />
