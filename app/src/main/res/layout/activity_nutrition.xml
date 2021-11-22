@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     tools:context=".NutritionActivity">
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity ="center"
-        android:fillViewport="true"
-        android:layout_marginTop="0dp"
-        android:id="@+id/scrollView">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:id="@+id/details">
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:fillViewport="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,8 +72,15 @@
                 android:id="@+id/textView_tan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="탄수화물" />
-
+                android:text="탄수화물 :" />
+            <TextView
+                android:id="@+id/ate_tan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
             <ProgressBar
                 android:id="@+id/progress_tan"
                 style="@android:style/Widget.ProgressBar.Horizontal"
@@ -91,8 +111,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="단백질" />
-
+                android:text="단백질 :" />
+            <TextView
+                android:id="@+id/ate_dan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
             <ProgressBar
                 android:id="@+id/progress_dan"
                 style="@android:style/Widget.ProgressBar.Horizontal"
@@ -123,7 +150,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="지방" />
+                android:text="지방 : " />
+            <TextView
+                android:id="@+id/ate_ji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_ji"
@@ -153,7 +188,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="포화지방" />
+                android:text="포화지방: " />
+            <TextView
+                android:id="@+id/ate_poji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_poji"
@@ -183,7 +226,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="식이섬유소" />
+                android:text="식이섬유소: " />
+            <TextView
+                android:id="@+id/ate_sik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_sik"
@@ -215,7 +266,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="콜레스테롤" />
+                android:text="콜레스테롤: " />
+            <TextView
+                android:id="@+id/ate_col"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_col"
@@ -246,7 +305,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="나트륨" />
+                android:text="나트륨: " />
+            <TextView
+                android:id="@+id/ate_na"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_na"
@@ -277,8 +344,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="*하루 섭취 칼로리 " />
-
+                android:text="칼로리 :" />
+            <TextView
+                android:id="@+id/ate_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="0"
+                android:padding="5dp"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progress_cal"
@@ -300,6 +374,7 @@
 
 
     </LinearLayout>
-</ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

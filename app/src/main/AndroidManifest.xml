@@ -19,12 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".SikActivity"
-            android:parentActivityName=".tcolnadangActivity"
+        <activity android:name=".NutritionTestActivity"
+            android:parentActivityName=".MainActivity"
             ></activity>
-        <activity android:name=".tcolnadangActivity"
-            android:parentActivityName=".tandanjipoActivity"/>
-
+        <activity
+            android:name=".SikActivity"
+            android:parentActivityName=".tcolnadangActivity" />
+        <activity
+            android:name=".tcolnadangActivity"
+            android:parentActivityName=".tandanjipoActivity" />
         <activity android:name=".tandanjipoActivity" />
         <activity android:name=".CropActivity" />
         <activity
@@ -73,8 +76,7 @@
             android:name=".FoodActivity"
             android:label="식단입력하기" />
         <activity
-            android:name=".NutritionActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".NutritionActivity" /> <!-- android:parentActivityName=".MainActivity"-->
         <activity
             android:name=".DetectorActivity"
             android:screenOrientation="portrait" />

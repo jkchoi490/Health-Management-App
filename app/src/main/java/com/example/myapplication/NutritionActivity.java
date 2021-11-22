@@ -27,6 +27,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 //import com.anychart.sample.R;
 
+
+
 public class NutritionActivity extends AppCompatActivity {
     final static String[] COLORS = new String[] {"#ae017e", "#dd3497", "#f768a1", "#6baed6", "#4292c6", "#2171b5", "#084594"}; // 차트 색상
 

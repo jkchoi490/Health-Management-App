@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         //영양성분
         ImageButton button_chart= (ImageButton)findViewById(R.id.imageButtonChart);
         button_chart.setOnClickListener(v -> {
-            Intent intent2 = new Intent(MainActivity.this,NutritionActivity.class);
+            //Intent intent2 = new Intent(MainActivity.this,NutritionActivity.class);
+            Intent intent2 = new Intent(MainActivity.this,NutritionTestActivity.class);
             startActivity(intent2);
         });
 

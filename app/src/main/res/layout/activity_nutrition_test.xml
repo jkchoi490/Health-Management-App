@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".NutritionTestActivity">
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:fillViewport="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <com.anychart.AnyChartView
+                    android:id="@+id/any_chart_view_circle"
+                    android:layout_width="350dp"
+                    android:layout_height="320dp"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="56dp"></com.anychart.AnyChartView>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/any_chart_view_circle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="칼로리/kcal :" />
+                    <TextView
+                        android:id="@+id/ate_cal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_cal"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_cal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="4dp"
+                        android:id="@+id/textView_tan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="탄수화물 :" />
+                    <TextView
+                        android:id="@+id/ate_tan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+                    <ProgressBar
+                        android:id="@+id/progress_tan"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_tan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textColor="@color/blue"
+                        android:text="0"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_dan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="단백질 :" />
+                    <TextView
+                        android:id="@+id/ate_dan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+                    <ProgressBar
+                        android:id="@+id/progress_dan"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_dan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_ji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="지방 : " />
+                    <TextView
+                        android:id="@+id/ate_ji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_ji"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_ji"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_poji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="포화지방: " />
+                    <TextView
+                        android:id="@+id/ate_poji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_poji"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_poji"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_sik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="식이섬유소: " />
+                    <TextView
+                        android:id="@+id/ate_sik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_sik"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:progress="0"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_sik"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textColor="@color/blue"
+                        android:text="0"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_col"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="콜레스테롤: " />
+                    <TextView
+                        android:id="@+id/ate_col"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_col"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_col"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="나트륨: " />
+                    <TextView
+                        android:id="@+id/ate_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:padding="5dp"
+                        android:textSize="17sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_na"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:paddingTop="9dp" />
+
+                    <TextView
+                        android:id="@+id/edit_na"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="@color/blue"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/button_check_calories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="14dp"
+                    android:textColor="@color/black"
+                    android:background="@color/SkyBlue"
+                    android:text="칼로리 확인하기" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+</RelativeLayout>
