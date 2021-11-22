@@ -244,7 +244,7 @@ public class CameraActivity2 extends AppCompatActivity {
             // add the features we want
             annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                 Feature textDetection = new Feature();
-                textDetection.setType("TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
+                textDetection.setType("DOCUMENT_TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
                 //textDetection.setType("TEXT_DETECTION");
                 textDetection.setMaxResults(10);
                 add(textDetection);
@@ -342,7 +342,7 @@ public class CameraActivity2 extends AppCompatActivity {
             //      message.append(String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription()));
             //    message.append("\n");
             message  = labels.get(0).getDescription();
-            System.out.println(message);
+            //System.out.println(message);
             //리스트 만들어서 글자 추출한 것
             nut_list.add(message);
 
@@ -354,7 +354,7 @@ public class CameraActivity2 extends AppCompatActivity {
         }
 
         // return message.toString();
-        System.out.println(nut_list);
+        System.out.println("nut_list 글자인식한 내용 : "+nut_list);
         return message;
     }
 

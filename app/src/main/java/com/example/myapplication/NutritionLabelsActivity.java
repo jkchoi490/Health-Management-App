@@ -30,6 +30,7 @@ public class NutritionLabelsActivity extends AppCompatActivity {
     TextView tv_tan, tv_dan, tv_ji,tv_poji, tv_transji, tv_sik,tv_col,tv_na,tv_dang;
     PieChart pieChart;
     public int dan, ji, poji, transji, sik, col, na, dang, tan = 0;
+
     ArrayList<String> nutrition_facts; //받아온 nut_list 내용
     ArrayList<String> nutrition_list= new ArrayList<String>();  //글자인식 부분 불용어 처리한 부분
     ArrayList<DictionaryCameraAnalyze> mArrayList;
@@ -44,23 +45,16 @@ public class NutritionLabelsActivity extends AppCompatActivity {
         nutrition_facts = (ArrayList<String>)n_intent.getSerializableExtra("strings");
         System.out.println("받아온 nut_list 내용(nutrition_facts):"+nutrition_facts);
 
+        System.out.println("nutrition_facts[0]:"+ nutrition_facts.get(0));
         //----------------영양성분표 받아온 내용---nutrition_facts 리스트의
         // 내용을 nut_list에 넣어야함*************************************-----------------------
+
 
 
 
         ArrayList<String> nut_list = new ArrayList<String>(); //nutrition_facts 리스트 내용 넣기
         List<String> nut_name_list = new ArrayList<>();
         List<Integer> nut_size_list = new ArrayList<>();
-
-        nut_list.add("나트륨 460 mg");
-        nut_list.add("탄수화물 49000mg"); //49g
-        nut_list.add("당류 8000mg"); //8g
-        nut_list.add("지방 24000 mg"); //24g
-        nut_list.add("트랜스지방 0g"); //0g
-        nut_list.add("포화지방 12000mg"); // 12g
-        nut_list.add("콜레스테롤 0mg");
-        nut_list.add("단백질 5000mg"); //5g
 
 
 
@@ -129,9 +123,9 @@ public class NutritionLabelsActivity extends AppCompatActivity {
 //-----------------------------------------------
 
         //nutrition_facts에서 글자 분할해서 아래 tan,dan,ji,... 값들 설정해주기
-        tan = 10;
-        dan = 10;
-        ji = 20;
+        tan = 50;
+        dan = 20;
+        ji = 10;
         poji = 10;
         transji=10;
         sik=10;

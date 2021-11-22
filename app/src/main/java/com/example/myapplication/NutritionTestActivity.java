@@ -35,7 +35,8 @@ public class NutritionTestActivity extends AppCompatActivity {
             "#FFFF00",// "#6baed6",포지
             "#4292c6",//"#4292c6",콜
            "#FFBB86FC",//"#2171b5",
-            "#084594"}; // 차트 색상
+            "#084594"
+    ,"#6baed6"}; // 차트 색상
 
     private DBHandlerNutrition dbHandlerNutrition;
 

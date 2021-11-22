@@ -155,8 +155,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         addPending = true;
 
-        showAddFaceDialog(crop_result_list);
 
+        click_and_passCrop(crop_result_list); //showAddFaceDialog(crop_result_list); 원래이거였음
         //Toast.makeText(this, "click", Toast.LENGTH_LONG ).show();
 
 
@@ -354,18 +354,20 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                       //      byteArrayToBitmap(cropImage_(cropCopyBitmap,cropCopyBitmap, location));
 
                                     //Bitmap crop_image = getCroppedBitmap_circle(cropCopyBitmap);
+
+                                    //카메라 프레임 내에서 글자인식 진행
                                     /*
-                                    카메라 프레임 내에서 글자인식 진행
+
                                     Bitmap crop_rect = Bitmap.createBitmap(cropCopyBitmap,
-                                            (int)location_left*2,
-                                            (int)location_top*2,
+                                            (int)location_left*1,
+                                            (int)location_top*1,
                                             (int)location_width*1,
                                             (int)location_height*1);
 
 
                                     if(api_call == false) {
-                                        cloudText_recognize(crop_rect);
-                                        //cloudText_recognize(cropCopyBitmap);
+                                       // cloudText_recognize(crop_rect);
+                                        cloudText_recognize(cropCopyBitmap);
                                     }
 
                                     if (nut_list.size() != 0){
@@ -377,8 +379,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                    else{
                                        break;
                                     }
-
-                                     */
+*/
 
                                   //  Bitmap crop_image = getCroppedBitmap_circle(cropCopyBitmap);
                                    Bitmap crop_image = cropBitmap_testing(cropCopyBitmap);//이게찐임
@@ -388,7 +389,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     //Bitmap crop_image = cropImage2(cropCopyBitmap,location);
                                     //Bitmap crop_image = cropImageRect(cropCopyBitmap,location);
 
-                                    crop_result_list.setCrop(crop_image);
+                                    crop_result_list.setCrop(crop_image);//이게찐임
 
 
                                 }catch (Exception err){
@@ -494,11 +495,21 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     }
 
+    public void click_and_passCrop(Detector.Recognition rec) {
+        pass_image = rec.getCrop(); //넘겨줄 이미지
+
+        Intent intent = new Intent(DetectorActivity.this, CropActivity.class);
+        //image 넘겨주기
+        intent.putExtra("pass_image",pass_image);
+        startActivity(intent);
+
+    }
+
+
+
 
 
     public Bitmap cropBitmap_testing(Bitmap original) {
-
-
         //original.getWidth() : 384
         //original.getHeight() : 384
         System.out.println("previewWidth : "+previewWidth);
@@ -508,8 +519,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         System.out.println("original.getHeight() : "+original.getHeight());
 
         Bitmap result = Bitmap.createBitmap(original
-                , original.getWidth()/4// 128 X 시작위치 (원본의 4/1지점)
-                , original.getHeight()/4 //128  Y 시작위치 (원본의 4/1지점)
+                , original.getWidth()/3// 128 X 시작위치 (원본의 4/1지점)
+                , original.getHeight()/3 //128  Y 시작위치 (원본의 4/1지점)
                 , original.getWidth()/2 //192 넓이 (원본의 절반 크기) 86original.getWidth()/2
                 , original.getHeight()/2); //192 높이 (원본의 절반 크기)125original.getHeight()/2
 
@@ -624,8 +635,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         return thisiscropimage;
     }
 
-   // private byte[] cropImage_(Bitmap bitmap, View frame, View reference) {
-        private byte[] cropImage_(Bitmap bitmap, View frame, RectF reference) {
+
+    private byte[] cropImage_(Bitmap bitmap, View frame, RectF reference) {
         float heightOriginal = frame.getHeight();
         float widthOriginal = frame.getWidth();
 

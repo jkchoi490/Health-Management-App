@@ -53,7 +53,14 @@ public class CropActivity extends AppCompatActivity {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+
     }
+    //=====================================================================
+
+//=====================================================================
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
