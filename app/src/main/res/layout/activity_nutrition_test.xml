@@ -73,6 +73,7 @@
                     <ProgressBar
                         android:id="@+id/progress_cal"
                         style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:indeterminateTint="@color/cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -113,6 +114,7 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:indeterminateTint="@color/tan"
                         android:layout_weight="4"
                         android:paddingTop="9dp" />
 
@@ -151,6 +153,7 @@
                     <ProgressBar
                         android:id="@+id/progress_dan"
                         style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:indeterminateTint="@color/dan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -192,6 +195,7 @@
                     <ProgressBar
                         android:id="@+id/progress_ji"
                         style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:indeterminateTint="@color/ji"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -233,6 +237,7 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:indeterminateTint="@color/poji"
                         android:layout_weight="4"
                         android:paddingTop="9dp" />
 
@@ -274,6 +279,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:progress="0"
+                        android:indeterminateTint="@color/sik"
                         android:paddingTop="9dp" />
 
                     <TextView
@@ -311,6 +317,7 @@
                     <ProgressBar
                         android:id="@+id/progress_col"
                         style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:indeterminateTint="@color/col"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -354,6 +361,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
+                        android:indeterminateTint="@color/na"
                         android:paddingTop="9dp" />
 
                     <TextView

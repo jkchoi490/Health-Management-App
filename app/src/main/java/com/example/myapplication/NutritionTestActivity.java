@@ -28,13 +28,13 @@ import java.util.ArrayList;
 
 public class NutritionTestActivity extends AppCompatActivity {
 
-    final static String[] COLORS = new String[]{"" +
-            "#ae017e",
-            "#dd3497",
-            "#f768a1",
-            "#6baed6",
-            "#4292c6",
-            "#2171b5",
+    final String[] COLORS = new String[]{
+           "#ff5500", //탄
+            "#fb7268",// "#dd3497",단
+            "#FFA726",//"#f768a1",지
+            "#FFFF00",// "#6baed6",포지
+            "#4292c6",//"#4292c6",콜
+           "#FFBB86FC",//"#2171b5",
             "#084594"}; // 차트 색상
 
     private DBHandlerNutrition dbHandlerNutrition;

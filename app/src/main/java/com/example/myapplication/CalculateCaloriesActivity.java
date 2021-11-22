@@ -51,7 +51,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
     public double transjibang = 0;  //최소화
     public double pohwajibang = 0;  //(7%미만, 최소화)
     public double sickisumyoo =25;    //1일 20g-25g (1g 당 2kcal) => 40 ~ 50kcal
-    public double cholesterol = 2000;  //0 최소화
+    public double cholesterol = 200;  //0 최소화
     public double Nat = 4000;              // 1일 4000mg 이하
     public double dang = 0;         //0최소화
 
