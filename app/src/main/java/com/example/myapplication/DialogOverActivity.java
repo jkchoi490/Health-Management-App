@@ -7,8 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.Serializable;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class DialogOverActivity extends AppCompatActivity {
 
@@ -38,16 +37,13 @@ public class DialogOverActivity extends AppCompatActivity {
 
 
         Intent intent_ = getIntent();
-        Map<String, Integer> map = (Map<String, Integer>)intent_.getSerializableExtra("map");
 
-        System.out.println("map 값 전달 테스팅---------------");
-        for (String mapkey : map.keySet()){
-            System.out.println("key:"+mapkey+",value:"+map.get(mapkey));
-        }
-
+        ArrayList passList = intent_.getParcelableArrayListExtra("value_count");
+        //   ArrayList<Par> items = getIntent().getParcelableArrayListExtra("value_count");
 
         //탄단지포....영양성분들 중에 하루 권장량을 넘어가면 x 이미지로 변경해주기
         try {
+            /*
             data_tan = map.get("탄수화물 ");
             data_dan = map.get("단백질 ");
             data_ji = map.get("지방 ");
@@ -55,26 +51,27 @@ public class DialogOverActivity extends AppCompatActivity {
             data_sik = map.get("식이섬유 ");
             data_na = map.get("나트륨 ");
             data_col = map.get("콜레스테롤 ");
+            */
 
-            if (data_tan > 100) {
+            if (passList.contains("tan") == true) {
                 tan_check.setImageResource(R.drawable.cancel);
             }
-            if(data_dan >100){
+            if (passList.contains("dan") == true) {
                 dan_check.setImageResource(R.drawable.cancel);
             }
-            if(data_ji > 100){
+            if (passList.contains("ji") == true) {
                 ji_check.setImageResource(R.drawable.cancel);
             }
-            if(data_poji > 100){
+            if (passList.contains("poji") == true) {
                 poji_check.setImageResource(R.drawable.cancel);
             }
-            if(data_sik > 100){
+            if (passList.contains("sik") == true) {
                 sik_check.setImageResource(R.drawable.cancel);
             }
-            if(data_na > 100){
+            if (passList.contains("na") == true) {
                 na_check.setImageResource(R.drawable.cancel);
             }
-             if(data_col > 100){
+            if (passList.contains("col") == true) {
                 col_check.setImageResource(R.drawable.cancel);
             }
 
@@ -87,7 +84,7 @@ public class DialogOverActivity extends AppCompatActivity {
         Button button_yellow= findViewById(R.id.button_yellow);
         button_yellow.setOnClickListener(v -> {
             Intent ask_i = new Intent(DialogOverActivity.this, DialogAskPlanActivity.class);
-            ask_i.putExtra("map",(Serializable) map);
+            //ask_i.putExtra("map",(Serializable) map);
             startActivity(ask_i);
         });
         //취소 버튼시 돌아가기 기능

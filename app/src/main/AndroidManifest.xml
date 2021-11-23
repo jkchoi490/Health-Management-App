@@ -8,9 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -21,9 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".NutritionTestActivity"
-            android:parentActivityName=".MainActivity"
-            ></activity>
+        <activity android:name=".ParsingRecognizedTextActivity"></activity>
+        <activity
+            android:name=".NutritionTestActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SikActivity"
             android:parentActivityName=".tcolnadangActivity" />
@@ -48,7 +48,7 @@
         <activity android:name=".DialogAskPlanActivity" />
         <activity android:name=".DialogOverActivity" />
         <activity android:name=".DialogNotOverActivity" />
-        <activity android:name=".ExerciseActivity" />
+        <activity android:name=".Exercise2Activity" />
         <activity
             android:name=".CameraAnalyzeActivity"
             android:label="일단다이얼로그랑코딩테스팅"
@@ -77,8 +77,7 @@
         <activity
             android:name=".FoodActivity"
             android:label="식단입력하기" />
-        <activity
-            android:name=".NutritionActivity" /> <!-- android:parentActivityName=".MainActivity"-->
+        <activity android:name=".NutritionActivity" /> <!-- android:parentActivityName=".MainActivity" -->
         <activity
             android:name=".DetectorActivity"
             android:screenOrientation="portrait" />

@@ -92,7 +92,10 @@ public class CameraActivity2 extends AppCompatActivity {
             builder.create().show();
              */
 
+            //이거였음
             Intent n_intent = new Intent(CameraActivity2.this, NutritionLabelsActivity.class);
+
+           // Intent n_intent = new Intent(CameraActivity2.this, ParsingRecognizedTextActivity.class);
             // text 분석한 내용 넘겨주기
             n_intent.putExtra("strings", nut_list);
             startActivity(n_intent);
@@ -244,7 +247,7 @@ public class CameraActivity2 extends AppCompatActivity {
             // add the features we want
             annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                 Feature textDetection = new Feature();
-                textDetection.setType("DOCUMENT_TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
+                textDetection.setType("TEXT_DETECTION"); //DOCUMENT_TEXT_DETECTION
                 //textDetection.setType("TEXT_DETECTION");
                 textDetection.setMaxResults(10);
                 add(textDetection);
@@ -300,7 +303,7 @@ public class CameraActivity2 extends AppCompatActivity {
     private void callCloudVision(final Bitmap bitmap) {
         // Switch text to loading
 
-        mImageDetails.setText(R.string.loading_message);
+        mImageDetails.setText("해당 영양성분표 글자인식 진행 중...");
 
         // Do the real work in an async task, because we need to use the network anyway
         try {

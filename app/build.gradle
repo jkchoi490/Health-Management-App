@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -57,6 +58,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-support:0.1.0-rc1'
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0-rc1'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+
     // compile 'com.google.api-client:google-api-client-android:1.22.0'
     compile 'com.google.apis:google-api-services-vision:v1-rev357-1.22.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
@@ -97,6 +99,10 @@ dependencies {
     androidTestImplementation 'com.google.truth:truth:1.0.1'
     implementation 'org.tensorflow:tensorflow-lite:+' //종속성 추가 (3)
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    
 
 
+}
+repositories {
+    mavenCentral()
 }

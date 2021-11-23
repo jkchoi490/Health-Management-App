@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -118,7 +117,7 @@ public class DialogPlanExercise1Activity extends AppCompatActivity {
             s_valueList.add(s_minutes);
 
             orange_i.putExtra("s_valueList",s_valueList);
-            orange_i.putExtra("map",(Serializable) map);
+            //orange_i.putExtra("map",(Serializable) map);
             startActivity(orange_i);
         });
 

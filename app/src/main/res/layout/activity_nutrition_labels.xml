@@ -552,7 +552,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="콜레스테롤"
+                    android:text="콜레스테롤(mg)"
                     android:textSize="18sp"/>
 
                 <!--Text view to display the percentage -->
@@ -590,7 +590,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="나트륨"
+                    android:text="나트륨(mg)"
                     android:textSize="18sp"/>
 
                 <!--Text view to display the percentage -->
