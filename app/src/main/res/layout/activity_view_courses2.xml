@@ -8,7 +8,7 @@
     tools:context=".ViewCourses2">
 
 
-        <!--recycler view for displaying our courses-->
+        <!-- -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourses"
             android:layout_width="match_parent"

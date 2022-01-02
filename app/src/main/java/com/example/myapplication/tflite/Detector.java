@@ -12,7 +12,7 @@ public interface Detector {
     List<Recognition> recognizeImage(Bitmap bitmap);
 
     void enableStatLogging(final boolean debug);
-    void register(String name, Recognition recognition); //객체 저장 -----이거 추가됏었음
+    void register(String name, Recognition recognition);
     String getStatString();
 
     void close();
@@ -21,7 +21,7 @@ public interface Detector {
 
     void setUseNNAPI(boolean isChecked);
 
-    Object process(Bitmap image); //d이거 도 추가됐는데..?
+    Object process(Bitmap image);
 
     // RectF getBoundingBox();
 
@@ -43,7 +43,7 @@ public interface Detector {
 
         /** Optional location within the source image for the location of the recognized object. */
         private RectF location;
-        private Bitmap crop; //이미지 따오기 위해서 만든거
+        private Bitmap crop;
         private Object extra;
         private Integer color;
         private Float distance;
@@ -58,8 +58,8 @@ public interface Detector {
             this.title = title;
             this.confidence = confidence;
             this.location = location;
-            this.crop = null; //이미지 잘라내기 위해
-            this.extra = null; //extra 추가
+            this.crop = null;
+            this.extra = null;
         }
 
         public String getId() {
@@ -108,7 +108,7 @@ public interface Detector {
 
             return resultString.trim();
         }
-        //밑에 추가
+
         public void setCrop(Bitmap crop) {
             this.crop = crop;
         }

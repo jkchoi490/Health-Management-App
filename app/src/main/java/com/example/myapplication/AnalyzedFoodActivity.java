@@ -23,10 +23,10 @@ public class AnalyzedFoodActivity extends AppCompatActivity {
         }
 
         System.out.println("탄수화물 값 "+map.get("탄수화물 "));
-        System.out.println("단백질 값(value)"+map.get("단백질 ")); //이거 보여주면 되것다!
+        System.out.println("단백질 값(value)"+map.get("단백질 "));
 
 
-        //not_over Activity에 온경우
+        //not_over Activity
         //Intent intent_2 = getIntent();
         //Map<String, Integer> map_not_over = (Map<String, Integer>)intent_.getSerializableExtra("map_not_over");
 

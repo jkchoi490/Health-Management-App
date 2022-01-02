@@ -40,6 +40,9 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.myapplication.customview.AutoFitTextureView;
+import com.example.myapplication.env.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,8 +50,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-import com.example.myapplication.customview.AutoFitTextureView;
-import com.example.myapplication.env.Logger;
 
 @SuppressLint("ValidFragment")
 public class CameraConnectionFragment extends Fragment {
@@ -535,7 +536,6 @@ public class CameraConnectionFragment extends Fragment {
                     (long) lhs.getWidth() * lhs.getHeight() - (long) rhs.getWidth() * rhs.getHeight());
         }
     }
-
     /** Shows an error message dialog. */
     public static class ErrorDialog extends DialogFragment {
         private static final String ARG_MESSAGE = "message";

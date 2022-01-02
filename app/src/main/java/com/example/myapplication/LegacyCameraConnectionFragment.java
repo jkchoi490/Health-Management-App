@@ -15,11 +15,13 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import java.io.IOException;
-import java.util.List;
+
 import com.example.myapplication.customview.AutoFitTextureView;
 import com.example.myapplication.env.ImageUtils;
 import com.example.myapplication.env.Logger;
+
+import java.io.IOException;
+import java.util.List;
 
 @SuppressLint("ValidFragment")
 public class LegacyCameraConnectionFragment extends Fragment {
@@ -33,7 +35,6 @@ public class LegacyCameraConnectionFragment extends Fragment {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
-
     private Camera camera;
     private Camera.PreviewCallback imageListener;
     private Size desiredSize;

@@ -20,16 +20,10 @@ public class DialogNotOverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_not_over);
-/*
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(),R.drawable.checked, null);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                drawable.getMinimumHeight());
-        edit.setCompoundDrawables(drawable, null, null, null);
-     //   editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.checked, 0);
-*/
+
         Button button_cancel= (Button)findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(v -> {
-            Intent back_i = new Intent(DialogNotOverActivity.this, CameraAnalyzeActivity.class);
+            Intent back_i = new Intent(DialogNotOverActivity.this, MainActivity.class);// 추가
             startActivity(back_i); //일단 DialogNotActivity로 이동
         });
 

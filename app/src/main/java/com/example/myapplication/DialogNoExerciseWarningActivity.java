@@ -20,8 +20,5 @@ public class DialogNoExerciseWarningActivity extends AppCompatActivity {
             startActivity(i_back);
         });
 
-
-
-
     }
 }

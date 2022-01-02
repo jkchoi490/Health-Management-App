@@ -114,8 +114,6 @@
                     android:textColor="@color/black"
                     android:textSize="19dp"
                     android:text="1/3" />
-
-
             </LinearLayout>
 
             <ProgressBar
@@ -193,6 +191,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

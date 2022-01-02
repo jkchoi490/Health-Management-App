@@ -24,8 +24,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         buildTypes.each {
-            // it.buildConfigField 'String', 'API_KEY', ApiKey
-            it.buildConfigField ('String', 'API_KEY', "\"AIzaSyCvzYj8F337WKnyVREMx3aXGo7YYEdwhdQ\"")
+            // it.buildConfigField 'String', 'API_KEY',  _____apikey______부분 지우고 키 입력
+            it.buildConfigField ('String', 'API_KEY', "\"_____apikey______\"")
         }
 
 

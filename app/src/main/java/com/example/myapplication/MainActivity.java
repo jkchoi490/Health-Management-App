@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent4);
         });
 
-        //test 용
+        //test용
         ImageButton button_camera_analyze = (ImageButton)findViewById(R.id.imageButtonAnalyze);
         button_camera_analyze.setOnClickListener(v -> {
             Intent intent5 = new Intent(MainActivity.this, AnalyzedFoodActivity.class);

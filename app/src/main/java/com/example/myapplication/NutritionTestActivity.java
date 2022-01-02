@@ -101,8 +101,6 @@ public class NutritionTestActivity extends AppCompatActivity {
 
 
             try {
-
-
                 //영양성분별 수치 입력 -> 운동할거 아니거나 음식 먹는거 아니면 변동 x
                 TextView t_calories = findViewById(R.id.edit_cal);
                 t_calories.setText(cal_in_db);
@@ -202,8 +200,6 @@ public class NutritionTestActivity extends AppCompatActivity {
 
 
 //프로그레스바============================================================================
-
-
                 int p_cal = 0;
                 int p_tan = 0;
                 int p_dan = 0;
@@ -239,9 +235,7 @@ public class NutritionTestActivity extends AppCompatActivity {
                         Integer.parseInt(chart_datas[3]), //포지
                         Integer.parseInt(chart_datas[4]), //콜
                         Integer.parseInt(chart_datas[5]), //나트륨
-                       // (int)u_cole, //콜레스테롤 --------->Error datas로 바꾸면 될듯????;;
-                       // (int)u_po_ji,//Integer.parseInt(chart_datas[7]), //포화지방
-                        //(int)u_transji//Integer.parseInt(chart_datas[8]) //트랜스지방
+
                 };
 
 

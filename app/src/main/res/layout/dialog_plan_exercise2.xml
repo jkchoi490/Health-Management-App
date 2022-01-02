@@ -42,8 +42,6 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:text="output" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -95,8 +93,6 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:text="분" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -230,12 +226,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/aqua"
                 android:text="진행하기" />
-
-
        </LinearLayout>
-
     </LinearLayout>
-
-
-
 </LinearLayout>

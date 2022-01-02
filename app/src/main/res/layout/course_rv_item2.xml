@@ -16,7 +16,7 @@
     android:orientation="vertical"
     tools:ignore="MissingClass">
 
-    <!--text view for our course name-->
+
     <TextView
         android:id="@+id/idName"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <!--text view for our course tracks-->
+
         <TextView
             android:id="@+id/idTracks"
             android:layout_width="0dp"
@@ -42,7 +42,6 @@
             android:textColor="@color/black" />
 
 
-        <!--text view for our course duration-->
         <TextView
             android:id="@+id/idDuration"
             android:layout_width="0dp"
@@ -54,7 +53,7 @@
 
     </LinearLayout>
 
-    <!--text view for our course description-->
+
     <TextView
         android:id="@+id/idDescription"
         android:layout_width="match_parent"

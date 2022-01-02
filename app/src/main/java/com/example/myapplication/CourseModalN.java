@@ -1,8 +1,7 @@
 package com.example.myapplication;
 
 public class CourseModalN {
-    // variables for our name,
-    // description, tracks and duration, id.
+
     private String name;
     private String gender;
     private String height;
@@ -18,8 +17,6 @@ public class CourseModalN {
     private String col;
     private String na;
 
-
-    // creating getter and setter methods
     public String getname() { return name; }
 
     public void setname(String name) {

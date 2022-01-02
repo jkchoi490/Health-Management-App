@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".ParsingRecognizedTextActivity"></activity>
+        <activity
+            android:name=".AnalyzedFoodActivity"
+            android:exported="false" />
         <activity
             android:name=".NutritionTestActivity"
             android:parentActivityName=".MainActivity" />
@@ -36,23 +38,17 @@
             android:name=".SelectFoodActivity"
             android:parentActivityName=".DetectorActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".AnalyzedFoodActivity" />
         <activity android:name=".MyNutritionsActivity" />
         <activity
             android:name=".NutritionLabelsActivity"
             android:parentActivityName=".CameraActivity2" />
-        <activity android:name=".PassDataActivity" />
         <activity android:name=".DialogPlanExercise2Activity" />
         <activity android:name=".DialogNoExerciseWarningActivity" />
         <activity android:name=".DialogPlanExercise1Activity" />
         <activity android:name=".DialogAskPlanActivity" />
         <activity android:name=".DialogOverActivity" />
         <activity android:name=".DialogNotOverActivity" />
-        <activity android:name=".Exercise2Activity" />
-        <activity
-            android:name=".CameraAnalyzeActivity"
-            android:label="일단다이얼로그랑코딩테스팅"
-            android:parentActivityName=".MainActivity" /> <!-- Image Crop 라이브러리 추가 -->
+        <activity android:name=".ExerciseActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

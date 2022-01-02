@@ -8,13 +8,23 @@
     tools:context=".ExerciseActivity">
 
 
-    <TextView
-        android:id="@+id/testing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="192dp"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

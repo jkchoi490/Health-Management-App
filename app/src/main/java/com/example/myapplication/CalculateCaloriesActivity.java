@@ -11,34 +11,6 @@ import java.util.ArrayList;
 
 public class CalculateCaloriesActivity extends AppCompatActivity {
 
-    /*
-    public SQLiteDatabase check_or_copy_db() {
-        String fileName = "userDB.db";
-        File file = getDatabasePath(fileName);
-        if (!file.exists()) {
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdir();
-            }
-
-            try {
-                InputStream inputStream = getAssets().open(fileName);
-                OutputStream outputStream = new FileOutputStream(file);
-                byte[] buffer = new byte[1024 * 8];
-                int numOfBytesToRead;
-
-                while ((numOfBytesToRead = inputStream.read(buffer)) > 0)
-                    outputStream.write(buffer, 0, numOfBytesToRead);
-
-                inputStream.close();
-                outputStream.close();
-            } catch (Exception err) {
-                System.out.println(err);
-            }
-        }
-        return SQLiteDatabase.openOrCreateDatabase(file, null);
-    }
-     */
-
 
     public double StandardWeight = 0; //표준체중
     public double DailyCalories = 0; //하루평균 총 필요열량
@@ -198,7 +170,7 @@ public class CalculateCaloriesActivity extends AppCompatActivity {
                             na_db);
 
                 } catch (Exception err) {
-                    System.out.println("으아아아ㅏ아에러그만");
+                    System.out.println("DBHandler error-----------");
                 }
 
 

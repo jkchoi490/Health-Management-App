@@ -2,15 +2,12 @@ package com.example.myapplication;
 
 public class CourseModal {
 
-    // variables for our name,
-    // description, tracks and duration, id.
     private String name;
     private String gender;
     private String height;
     private String exercise; //평균운동량
     private int id;
 
-    // creating getter and setter methods
     public String getname() {
         return name;
     }

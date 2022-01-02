@@ -81,7 +81,7 @@ public class NutritionLabelsActivity extends AppCompatActivity {
 //        String result_col = str.substring(col_num,(str.substring(col_num).indexOf("g")+col_num));
         String result_na = str.substring(na_num,(str.substring(na_num).indexOf("g")+na_num));
         String result_dang = str.substring(dang_num,(str.substring(dang_num).indexOf("g")+dang_num));
-        String result_transji = str.substring(transji_num,(str.substring(transji_num).indexOf("%")+transji_num));
+        String result_transji = str.substring(transji_num,(str.substring(transji_num).indexOf("g")+transji_num));
 
         try {
 
@@ -96,7 +96,7 @@ public class NutritionLabelsActivity extends AppCompatActivity {
             result_col = str_clone;
 
         }catch (Exception err){
-            System.out.println("I HATE ERROR!!!!!!!!!!!!!!!");
+            System.out.println("TEXT PARSE ERROR");
         }
 
 
@@ -153,14 +153,7 @@ public class NutritionLabelsActivity extends AppCompatActivity {
 
 
         //========================================================================================
-        //map에서 글자 분할해서 아래 tan,dan,ji,... 값들 설정해주기
-        //백분율로 나타내야하므로
-
-        /*
-        * 전체 90 kcal : 두유
-        *
-        *
-        * */
+        //map에서 글자 분할해서 아래 tan,dan,ji,... 값들 설정 후 백분율로 나타내기
 
 
     tan = (int)(iTan * 7.716179);
@@ -187,7 +180,7 @@ public class NutritionLabelsActivity extends AppCompatActivity {
         tv_col = findViewById(R.id.textView_col);
         tv_dang= findViewById(R.id.textView_dang);
 
-        // Set the percentage of language used
+
         tv_tan.setText(Integer.toString(iTan )); //탄수화물
         tv_dan.setText(Integer.toString(iDan)); //단백질
         tv_ji.setText(Integer.toString(iJi)); //지방
@@ -239,7 +232,6 @@ public class NutritionLabelsActivity extends AppCompatActivity {
         setData();
 
         //버튼 클릭시 액티비티 이동 button_blue
-
         Button button_camera = (Button)findViewById(R.id.button_blue);
         button_camera.setOnClickListener(v -> {
             Intent intent_next = new Intent(NutritionLabelsActivity.this, MyNutritionsActivity.class);
@@ -255,22 +247,22 @@ public class NutritionLabelsActivity extends AppCompatActivity {
         // Set the data and color to the pie chart
         pieChart.addPieSlice(
                 new PieModel("탄수화물",
-                       34,// chart_tan,//Integer.parseInt(tv_tan.getText().toString()),
+                        chart_tan,//Integer.parseInt(tv_tan.getText().toString()),
                         Color.parseColor("#ff5500")));
         pieChart.addPieSlice(
                 new PieModel(
                         "단백질",
-                        21,//chart_dan,
+                        chart_dan,
                         Color.parseColor("#fb7268")));
         pieChart.addPieSlice(
                 new PieModel(
                         "지방",
-                        17,//chart_ji,
+                        chart_ji,
                         Color.parseColor("#FFA726")));
         pieChart.addPieSlice(
                 new PieModel(
                         "포화지방",
-                        1,//chart_poji,
+                        chart_poji,
                         Color.parseColor("#FFFF00")));
 
         pieChart.addPieSlice(
@@ -291,12 +283,12 @@ public class NutritionLabelsActivity extends AppCompatActivity {
         pieChart.addPieSlice(
                 new PieModel(
                         "나트륨",
-                       1,// chart_na,//Integer.parseInt(tv_na.getText().toString()),
+                        chart_na,//Integer.parseInt(tv_na.getText().toString()),
                         Color.parseColor("#800000")));
         pieChart.addPieSlice(
                 new PieModel(
                         "당류",
-                        25,//chart_dang,//Integer.parseInt(tv_dang.getText().toString()),
+                        chart_dang,//Integer.parseInt(tv_dang.getText().toString()),
                         Color.parseColor("#FFBB86FC")));
         pieChart.startAnimation();
     }

@@ -43,15 +43,7 @@ public class DialogOverActivity extends AppCompatActivity {
 
         //탄단지포....영양성분들 중에 하루 권장량을 넘어가면 x 이미지로 변경해주기
         try {
-            /*
-            data_tan = map.get("탄수화물 ");
-            data_dan = map.get("단백질 ");
-            data_ji = map.get("지방 ");
-            data_poji = map.get("포화지방 ");
-            data_sik = map.get("식이섬유 ");
-            data_na = map.get("나트륨 ");
-            data_col = map.get("콜레스테롤 ");
-            */
+
 
             if (passList.contains("tan") == true) {
                 tan_check.setImageResource(R.drawable.cancel);

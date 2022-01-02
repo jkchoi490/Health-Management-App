@@ -2,15 +2,12 @@ package com.example.myapplication;
 
 public class CourseModal2 {
 
-    // variables for our date,
-    // description, tracks and duration, id.
     private String date; //date 날짜
     private String diet; //diet 아점저
     private String menu; //menu 메뉴이름
     private String size; //size 인분
     private int id;
 
-    // creating getter and setter methods
     public String getdate() {
         return date;
     }

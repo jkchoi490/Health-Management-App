@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
 
-    // variable for our array list and context
+
     private ArrayList<CourseModal> courseModalArrayList;
     private Context context;
 
@@ -28,16 +28,14 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // on below line we are inflating our layout
-        // file for our recycler view items.
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // on below line we are setting data
-        // to our views of recycler view item.
+
         CourseModal modal = courseModalArrayList.get(position);
         holder.courseNameTV.setText(modal.getname());
         holder.courseDescTV.setText(modal.getexercise());

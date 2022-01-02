@@ -54,7 +54,7 @@ public class tandanjipoActivity extends AppCompatActivity {
 
 
             } catch (Exception err) {
-                System.out.println("db에러 같은데");
+                System.out.println("DBHandlerNutrition--> Error");
             }
         }
 

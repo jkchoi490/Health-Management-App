@@ -33,11 +33,7 @@ public class CropActivity extends AppCompatActivity {
         ImageView passImage = findViewById(R.id.quick_start_cropped_image);
         passImage.setImageBitmap(pass_image);
 
-
         startCropActivity();
-
-
-
     }
 
     private void startCropActivity() {
@@ -55,12 +51,6 @@ public class CropActivity extends AppCompatActivity {
         return Uri.parse(path);
 
     }
-    //=====================================================================
-
-//=====================================================================
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

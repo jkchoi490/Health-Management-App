@@ -77,13 +77,8 @@ public class DialogPlanExercise1Activity extends AppCompatActivity {
        spinnerList_value.add("10");
        spinnerList_value.add("15");
 
-
-
         edit_hour = (EditText)findViewById(R.id.hour);
         edit_minutes =(EditText)findViewById(R.id.minutes);
-
-
-
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, spinnerList);

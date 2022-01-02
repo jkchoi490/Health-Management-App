@@ -13,7 +13,6 @@ public class tcolnadangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tcolnadang);
 
-
         Button button_tcolna= findViewById(R.id.button_tcolna);
         button_tcolna.setOnClickListener(v -> {
             Intent imsick= new Intent(tcolnadangActivity.this,SikActivity.class);
