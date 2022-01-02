@@ -1,2 +1,2 @@
 # HealthManagement
-Android app using Tflite object detection model(Computer Vision)
+Android app using Tflite object detection model
