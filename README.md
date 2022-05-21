@@ -1,2 +1,2 @@
 # Health-Management-App
-건강관리 앱
+영양성분표 분석 기반 건강관리 앱
